@@ -13,14 +13,16 @@ test("home renders real navigation and creator information", async () => {
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
-  for (const href of ["/knowledge", "/toolkit", "/paths", "/cases", "/coach", "/about"]) assert.match(html, new RegExp(`href="${href}"`));
+  for (const href of ["/knowledge", "/toolkit", "/paths", "/cases", "/coach", "/data", "/about"]) assert.match(html, new RegExp(`href="${href}"`));
+  assert.match(html, /ค้นหาทั้งเว็บไซต์/);
+  assert.match(html, /ข้ามไปยังเนื้อหาหลัก/);
   assert.match(html, /Boorapatis Ploysuwan/);
   assert.match(html, /mailto:burapatis@gmail\.com/);
   assert.doesNotMatch(html, /#case-detail|href="#principles"/);
 });
 
 test("all destination pages server-render successfully", async () => {
-  const routes = ["/knowledge", "/toolkit", "/paths", "/cases", "/coach", "/downloads", "/prompts", "/assessment", "/about", "/principles"];
+  const routes = ["/knowledge", "/toolkit", "/paths", "/cases", "/coach", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
   for (const route of routes) {
     const response = await render(route);
     assert.equal(response.status, 200, route);
@@ -28,9 +30,25 @@ test("all destination pages server-render successfully", async () => {
   }
 });
 
+test("publishes crawler discovery files", async () => {
+  const sitemap = await render("/sitemap.xml");
+  const robots = await render("/robots.txt");
+  assert.equal(sitemap.status,200);
+  assert.match(sitemap.headers.get("content-type")??"",/xml/i);
+  assert.match(await sitemap.text(),/\/toolkit/);
+  assert.equal(robots.status,200);
+  assert.match(robots.headers.get("content-type")??"",/^text\/plain/i);
+  assert.match(await robots.text(),/Sitemap:/);
+});
+
 test("deep-link targets exist on knowledge, cases and principles pages", async () => {
   const [knowledge, cases, principles] = await Promise.all([render("/knowledge").then(r=>r.text()), render("/cases").then(r=>r.text()), render("/principles").then(r=>r.text())]);
   for (const id of ["learning-psychology", "child-development", "individual-differences", "motivation", "udl", "differentiation"]) assert.match(knowledge, new RegExp(`id="${id}"`));
-  for (const id of ["voice-choice", "meaningful-goals", "scaffolding"]) assert.match(cases, new RegExp(`id="${id}"`));
+  for (const id of ["voice-choice", "meaningful-goals", "scaffolding", "external-supports", "responsive-assessment", "inclusive-dialogue"]) assert.match(cases, new RegExp(`id="${id}"`));
   for (const id of ["privacy", "responsible-ai", "accessibility"]) assert.match(principles, new RegExp(`id="${id}"`));
+});
+
+test("toolkit exposes every MVP tool target", async () => {
+  const html = await render("/toolkit").then(response=>response.text());
+  for (const id of ["profile-builder", "observation-log", "interview-guide", "evidence-rubric"]) assert.match(html,new RegExp(`id="${id}"`));
 });

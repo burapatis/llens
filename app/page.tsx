@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { SiteFooter } from "./_components/SiteChrome";
+import { GlobalSearch } from "./_components/GlobalSearch";
 
 const Arrow = () => <span aria-hidden="true">→</span>;
 
@@ -27,8 +28,6 @@ const promptText = "ช่วยวิเคราะห์ผู้เรีย
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [query, setQuery] = useState("");
   const [checked, setChecked] = useState<number[]>([]);
   const [pathProgress, setPathProgress] = useState(25);
   const [coachInput, setCoachInput] = useState("");
@@ -49,10 +48,6 @@ export default function Home() {
     });
   }, []);
 
-  const filteredTopics = useMemo(() => knowledgeTopics.filter((topic) =>
-    topic.join(" ").toLowerCase().includes(query.toLowerCase())
-  ), [query]);
-
   const toggleCheck = (index: number) => {
     const next = checked.includes(index) ? checked.filter((item) => item !== index) : [...checked, index];
     setChecked(next);
@@ -66,7 +61,7 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <main id="main-content">
       <header className="site-header">
         <Link className="brand" href="/" aria-label="Learner Lens หน้าแรก">
           <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
@@ -80,7 +75,7 @@ export default function Home() {
           <a href="/about">เกี่ยวกับโครงการ</a>
         </nav>
         <div className="header-actions">
-          <button className="search-button" aria-label="ค้นหา" onClick={() => setSearchOpen(true)}><span>⌕</span> ค้นหา</button>
+          <GlobalSearch />
           <a className="coach-button" href="/coach">ลอง AI Coach <Arrow /></a>
           <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="เปิดเมนู" aria-expanded={menuOpen}>☰</button>
         </div>
@@ -233,7 +228,6 @@ export default function Home() {
 
       <SiteFooter />
 
-      {searchOpen && <div className="search-modal" role="dialog" aria-modal="true" aria-label="ค้นหาคลังความรู้"><div className="search-box"><div className="search-input"><span>⌕</span><input value={query} onChange={(event)=>setQuery(event.target.value)} onKeyDown={(event)=>{if(event.key==="Escape")setSearchOpen(false)}} placeholder="ค้นหาหัวข้อ เช่น UDL, แรงจูงใจ..."/><button onClick={()=>setSearchOpen(false)}>ESC</button></div><div className="search-results">{filteredTopics.map(topic=><a key={topic[1]} href={`/knowledge#${topic[4]}`} onClick={()=>setSearchOpen(false)}><span>{topic[0]}</span><div><strong>{topic[1]}</strong><small>{topic[2]}</small></div><Arrow/></a>)}{filteredTopics.length===0&&<p>ยังไม่พบหัวข้อนี้ ลองใช้คำค้นอื่น</p>}</div></div></div>}
     </main>
   );
 }

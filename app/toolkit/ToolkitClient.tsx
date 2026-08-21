@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ToolkitExtras from "./ToolkitExtras";
 
 type Profile = { code: string; strengths: string; interests: string; evidence: string; barriers: string; nextStep: string };
 const emptyProfile: Profile = { code: "", strengths: "", interests: "", evidence: "", barriers: "", nextStep: "" };
 const tools = [
-  ["✓", "Checklist", "ทบทวนว่าข้อมูลด้านใดยังขาด ก่อนสรุปความต้องการ"],
-  ["▤", "Observation Form", "บันทึกพฤติกรรม บริบท และสิ่งที่เกิดก่อน–หลังอย่างเป็นกลาง"],
-  ["◇", "Interview Guide", "ฟังเสียงผู้เรียนผ่านคำถามปลายเปิดที่ไม่ชี้นำ"],
-  ["◎", "Rubric", "มองความก้าวหน้าตามเกณฑ์เดียวกันและระบุก้าวถัดไป"],
+  ["✓", "Learner Profile", "สังเคราะห์หลักฐาน จุดแข็ง อุปสรรค และก้าวถัดไป", "#profile-builder"],
+  ["▤", "Observation Log", "บันทึกพฤติกรรม บริบท และสิ่งที่เกิดขึ้นอย่างเป็นกลาง", "#observation-log"],
+  ["◇", "Interview Guide", "ฟังเสียงผู้เรียนผ่านคำถามปลายเปิดที่ไม่ชี้นำ", "#interview-guide"],
+  ["◎", "Evidence Rubric", "ตรวจคุณภาพหลักฐานก่อนใช้ตัดสินใจช่วยเหลือ", "#evidence-rubric"],
 ];
 const checklist = ["มีหลักฐานจากมากกว่าหนึ่งสถานการณ์", "บันทึกสิ่งที่สังเกตได้ แยกจากการตีความ", "ระบุจุดแข็งและความสนใจ", "ถามมุมมองของผู้เรียน", "กำหนดก้าวถัดไปที่เล็กและติดตามได้"];
 
@@ -35,16 +36,17 @@ export default function ToolkitClient() {
   };
 
   return <section className="subpage-section toolkit-page" id="top">
-    <div className="tool-card-grid">{tools.map(tool => <article key={tool[1]}><span>{tool[0]}</span><h2>{tool[1]}</h2><p>{tool[2]}</p></article>)}</div>
+    <nav className="tool-card-grid" aria-label="เลือกเครื่องมือ">{tools.map(tool => <a href={tool[3]} key={tool[1]}><span>{tool[0]}</span><h2>{tool[1]}</h2><p>{tool[2]}</p><strong>เปิดเครื่องมือ →</strong></a>)}</nav>
     <div className="builder-layout">
       <aside className="builder-checklist"><span className="section-kicker left">QUALITY CHECK</span><h2>ก่อนสรุป Profile</h2><p>{checks.length}/{checklist.length} รายการพร้อม</p>{checklist.map((item,index)=><label className={checks.includes(index)?"checked":""} key={item}><input type="checkbox" checked={checks.includes(index)} onChange={()=>toggle(index)}/><span>{checks.includes(index)?"✓":""}</span>{item}</label>)}</aside>
-      <form className="profile-builder" onSubmit={event=>{event.preventDefault();save();}}><div className="builder-head"><div><span className="section-kicker left">LEARNER PROFILE BUILDER</span><h2>ภาพผู้เรียนฉบับใช้งาน</h2></div><span>บันทึกใน Browser เท่านั้น</span></div>
+      <form className="profile-builder" id="profile-builder" onSubmit={event=>{event.preventDefault();save();}}><div className="builder-head"><div><span className="section-kicker left">LEARNER PROFILE BUILDER</span><h2>ภาพผู้เรียนฉบับใช้งาน</h2></div><span>บันทึกใน Browser เท่านั้น</span></div>
         <label>รหัสผู้เรียน (ไม่ใช้ชื่อจริง)<input value={profile.code} onChange={e=>update("code",e.target.value)} placeholder="เช่น P5-07" /></label>
         <div className="form-grid"><label>จุดแข็ง<textarea value={profile.strengths} onChange={e=>update("strengths",e.target.value)} placeholder="ผู้เรียนทำอะไรได้ดี ในบริบทใด" /></label><label>ความสนใจและแรงจูงใจ<textarea value={profile.interests} onChange={e=>update("interests",e.target.value)} placeholder="อะไรทำให้ผู้เรียนอยากมีส่วนร่วม" /></label><label>หลักฐานจากการสังเกต<textarea value={profile.evidence} onChange={e=>update("evidence",e.target.value)} placeholder="บันทึกสิ่งที่เห็น/ได้ยิน ไม่ตีความเจตนา" /></label><label>อุปสรรคที่ควรตรวจสอบ<textarea value={profile.barriers} onChange={e=>update("barriers",e.target.value)} placeholder="อุปสรรคจากงาน สื่อ เวลา หรือสภาพแวดล้อม" /></label></div>
         <label>ก้าวถัดไปที่ครูจะทดลอง<textarea value={profile.nextStep} onChange={e=>update("nextStep",e.target.value)} placeholder="เล็ก ชัด ทดลองได้ และมีหลักฐานติดตาม" /></label>
         <div className="builder-actions"><button className="primary-button" type="submit">บันทึก Profile</button><button className="outline-action" type="button" onClick={download}>ดาวน์โหลด JSON</button><button className="quiet-action" type="button" onClick={()=>{setProfile(emptyProfile);setChecks([]);localStorage.removeItem("learnerlens-profile");localStorage.removeItem("learnerlens-toolkit-checks");}}>ล้างข้อมูล</button>{saved&&<strong role="status">บันทึกแล้ว ✓</strong>}</div>
       </form>
     </div>
-    <div className="next-links"><a href="/coach">นำ Profile ไปคิดต่อกับ AI Coach →</a><a href="/downloads">ดาวน์โหลดแบบฟอร์มฉบับพิมพ์ →</a></div>
+    <ToolkitExtras/>
+    <div className="next-links"><a href="/coach">นำ Profile ไปคิดต่อกับ AI Coach →</a><a href="/downloads">ดาวน์โหลดแบบฟอร์มฉบับพิมพ์ →</a><a href="/data">สำรองข้อมูลในอุปกรณ์ →</a></div>
   </section>;
 }
