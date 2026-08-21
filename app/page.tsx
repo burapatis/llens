@@ -67,7 +67,7 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="/" aria-label="เรียนรู้ผู้เรียน LearnerLens หน้าแรก">
           <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
-          <span>Learner<span>Lens</span></span>
+          <span className="brand-copy"><span className="brand-en">Learner<span>Lens</span></span><small>เรียนรู้ผู้เรียน</small></span>
         </a>
         <nav className={menuOpen ? "nav open" : "nav"} aria-label="เมนูหลัก">
           <a href="/start">เริ่มใช้งาน</a>

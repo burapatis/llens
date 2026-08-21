@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { GlobalSearch } from "./GlobalSearch";
 
 export function Brand() {
-  return <a className="brand" href="/" aria-label="เรียนรู้ผู้เรียน LearnerLens หน้าแรก"><span className="brand-mark" aria-hidden="true"><i/><i/><i/></span><span>Learner<span>Lens</span></span></a>;
+  return <a className="brand" href="/" aria-label="เรียนรู้ผู้เรียน LearnerLens หน้าแรก"><span className="brand-mark" aria-hidden="true"><i/><i/><i/></span><span className="brand-copy"><span className="brand-en">Learner<span>Lens</span></span><small>เรียนรู้ผู้เรียน</small></span></a>;
 }
 
 export function SubHeader() {
