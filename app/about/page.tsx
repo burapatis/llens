@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { SubPage } from "../_components/SiteChrome";
 
 export const metadata: Metadata = {
@@ -48,13 +47,15 @@ export default function AboutPage() {
 
         <aside className="creator-card">
           <figure className="creator-photo">
-            <Image
+            {/* A pre-sized static asset avoids runtime image transformation in the Sites worker. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/images/boorapatis-ploysuwan.jpg"
               alt="Boorapatis Ploysuwan ผู้จัดทำเว็บไซต์ LearnerLens"
               width={800}
               height={1000}
-              sizes="(max-width: 980px) 100vw, 36vw"
-              priority
+              loading="eager"
+              decoding="async"
             />
           </figure>
           <span className="section-kicker left">ผู้จัดทำ</span>
