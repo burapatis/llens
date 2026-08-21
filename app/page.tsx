@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { SiteFooter } from "./_components/SiteChrome";
 
 const Arrow = () => <span aria-hidden="true">→</span>;
 
 const knowledgeTopics = [
-  ["◉", "จิตวิทยาการเรียนรู้", "เข้าใจความจำ ความสนใจ และการสร้างความหมาย", "Piaget · Vygotsky · Bruner"],
-  ["↗", "พัฒนาการเด็ก", "มองเห็นพัฒนาการด้านกาย อารมณ์ สังคม และสติปัญญา", "Development"],
-  ["◇", "ความแตกต่างระหว่างบุคคล", "สำรวจจุดแข็ง ความพร้อม ความสนใจ และบริบท", "Learner Diversity"],
-  ["✦", "แรงจูงใจและ Growth Mindset", "สร้างความเชื่อมั่นและแรงขับเคลื่อนจากภายใน", "Bandura · Dweck"],
-  ["◎", "Universal Design for Learning", "ออกแบบหลายวิธีในการมีส่วนร่วม เรียนรู้ และแสดงออก", "CAST UDL 3.0"],
-  ["◒", "Differentiated Instruction", "ปรับเนื้อหา กระบวนการ ชิ้นงาน และสภาพแวดล้อม", "Tomlinson"],
+  ["◉", "จิตวิทยาการเรียนรู้", "เข้าใจความจำ ความสนใจ และการสร้างความหมาย", "Piaget · Vygotsky · Bruner", "learning-psychology"],
+  ["↗", "พัฒนาการเด็ก", "มองเห็นพัฒนาการด้านกาย อารมณ์ สังคม และสติปัญญา", "Development", "child-development"],
+  ["◇", "ความแตกต่างระหว่างบุคคล", "สำรวจจุดแข็ง ความพร้อม ความสนใจ และบริบท", "Learner Diversity", "individual-differences"],
+  ["✦", "แรงจูงใจและ Growth Mindset", "สร้างความเชื่อมั่นและแรงขับเคลื่อนจากภายใน", "Bandura · Dweck", "motivation"],
+  ["◎", "Universal Design for Learning", "ออกแบบหลายวิธีในการมีส่วนร่วม เรียนรู้ และแสดงออก", "CAST UDL 3.0", "udl"],
+  ["◒", "Differentiated Instruction", "ปรับเนื้อหา กระบวนการ ชิ้นงาน และสภาพแวดล้อม", "Tomlinson", "differentiation"],
 ];
 
 const checklistItems = [
@@ -35,12 +37,16 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const savedChecks = localStorage.getItem("learnerlens-checklist");
-    const savedProgress = localStorage.getItem("learnerlens-progress");
-    const savedScores = localStorage.getItem("learnerlens-scores");
-    if (savedChecks) setChecked(JSON.parse(savedChecks));
-    if (savedProgress) setPathProgress(Number(savedProgress));
-    if (savedScores) setScores(JSON.parse(savedScores));
+    queueMicrotask(() => {
+      try {
+        const savedChecks = localStorage.getItem("learnerlens-checklist");
+        const savedProgress = localStorage.getItem("learnerlens-progress");
+        const savedScores = localStorage.getItem("learnerlens-scores");
+        if (savedChecks) setChecked(JSON.parse(savedChecks));
+        if (savedProgress) setPathProgress(Number(savedProgress));
+        if (savedScores) setScores(JSON.parse(savedScores));
+      } catch { localStorage.removeItem("learnerlens-checklist"); }
+    });
   }, []);
 
   const filteredTopics = useMemo(() => knowledgeTopics.filter((topic) =>
@@ -62,19 +68,20 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Learner Lens หน้าแรก">
+        <Link className="brand" href="/" aria-label="Learner Lens หน้าแรก">
           <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
           <span>Learner<span>Lens</span></span>
-        </a>
+        </Link>
         <nav className={menuOpen ? "nav open" : "nav"} aria-label="เมนูหลัก">
-          <a href="#knowledge">คลังความรู้</a>
-          <a href="#tools">เครื่องมือ</a>
-          <a href="#paths">เส้นทางการเรียนรู้</a>
-          <a href="#cases">กรณีศึกษา</a>
+          <a href="/knowledge">คลังความรู้</a>
+          <a href="/toolkit">เครื่องมือ</a>
+          <a href="/paths">เส้นทางการเรียนรู้</a>
+          <a href="/cases">กรณีศึกษา</a>
+          <a href="/about">เกี่ยวกับโครงการ</a>
         </nav>
         <div className="header-actions">
           <button className="search-button" aria-label="ค้นหา" onClick={() => setSearchOpen(true)}><span>⌕</span> ค้นหา</button>
-          <a className="coach-button" href="#coach">ลอง AI Coach <Arrow /></a>
+          <a className="coach-button" href="/coach">ลอง AI Coach <Arrow /></a>
           <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="เปิดเมนู" aria-expanded={menuOpen}>☰</button>
         </div>
       </header>
@@ -85,12 +92,12 @@ export default function Home() {
           <h1>เข้าใจผู้เรียน<br/><em>ให้มากกว่าที่เคย</em></h1>
           <p>เปลี่ยนความแตกต่างในห้องเรียน ให้เป็นโอกาสในการเรียนรู้ของเด็กทุกคน ด้วยความรู้ เครื่องมือ และผู้ช่วย AI ที่นำไปใช้ได้จริง</p>
           <div className="hero-actions">
-            <a className="primary-button" href="#paths">เริ่มเส้นทางของคุณ <Arrow /></a>
-            <a className="text-button" href="#tools"><span>▶</span> สำรวจเครื่องมือ</a>
+            <a className="primary-button" href="/paths">เริ่มเส้นทางของคุณ <Arrow /></a>
+            <a className="text-button" href="/toolkit"><span>▶</span> สำรวจเครื่องมือ</a>
           </div>
           <div className="trust-row">
             <div className="avatars" aria-hidden="true"><span>ก</span><span>ม</span><span>อ</span><span>พ</span></div>
-            <p><strong>ร่วมเรียนรู้ไปกับครู 12,000+ คน</strong><br/>เพื่อห้องเรียนที่เด็กทุกคนเติบโตได้</p>
+            <p><strong>พื้นที่เรียนรู้สำหรับครูทุกคน</strong><br/>เพื่อห้องเรียนที่เด็กทุกคนเติบโตได้</p>
           </div>
         </div>
 
@@ -127,16 +134,16 @@ export default function Home() {
           <p>เมื่อครูมองเห็นความต้องการ จุดแข็ง และบริบทที่แตกต่าง การสอนก็ไม่จำเป็นต้องมีเพียงคำตอบเดียว</p>
         </div>
         <div className="feature-grid">
-          <article><span className="feature-number">01</span><div className="feature-icon blue">◉</div><h3>มองเห็นผู้เรียนทั้งคน</h3><p>เข้าใจมากกว่าคะแนน ผ่านพัฒนาการ แรงจูงใจ อารมณ์ และบริบทชีวิต</p><a href="#tools">เรียนรู้การวิเคราะห์ <Arrow /></a></article>
-          <article><span className="feature-number">02</span><div className="feature-icon teal">↗</div><h3>ออกแบบเพื่อความแตกต่าง</h3><p>ปรับเนื้อหา กระบวนการ และชิ้นงาน ให้ทุกคนเข้าถึงและท้าทายในระดับที่เหมาะสม</p><a href="#paths">สำรวจแนวทาง UDL <Arrow /></a></article>
-          <article><span className="feature-number">03</span><div className="feature-icon violet">✦</div><h3>เปลี่ยนข้อมูลเป็นการช่วยเหลือ</h3><p>ใช้หลักฐานเล็ก ๆ จากห้องเรียน วางแผน ลงมือ และติดตามการเติบโตอย่างต่อเนื่อง</p><a href="#coach">ลองวางแผนกับ AI <Arrow /></a></article>
+          <article><span className="feature-number">01</span><div className="feature-icon blue">◉</div><h3>มองเห็นผู้เรียนทั้งคน</h3><p>เข้าใจมากกว่าคะแนน ผ่านพัฒนาการ แรงจูงใจ อารมณ์ และบริบทชีวิต</p><a href="/toolkit">เรียนรู้การวิเคราะห์ <Arrow /></a></article>
+          <article><span className="feature-number">02</span><div className="feature-icon teal">↗</div><h3>ออกแบบเพื่อความแตกต่าง</h3><p>ปรับเนื้อหา กระบวนการ และชิ้นงาน ให้ทุกคนเข้าถึงและท้าทายในระดับที่เหมาะสม</p><a href="/knowledge#udl">สำรวจแนวทาง UDL <Arrow /></a></article>
+          <article><span className="feature-number">03</span><div className="feature-icon violet">✦</div><h3>เปลี่ยนข้อมูลเป็นการช่วยเหลือ</h3><p>ใช้หลักฐานเล็ก ๆ จากห้องเรียน วางแผน ลงมือ และติดตามการเติบโตอย่างต่อเนื่อง</p><a href="/coach">ลองวางแผนกับ AI <Arrow /></a></article>
         </div>
       </section>
 
       <section className="impact-band">
-        <div><strong>1 ใน 3</strong><span>ผู้เรียนต้องการวิธีเข้าถึงบทเรียน<br/>ที่ต่างจากเพื่อนในบางช่วงเวลา</span></div>
-        <div><strong>0.47</strong><span>ขนาดอิทธิพลของความสัมพันธ์<br/>ครู–นักเรียนต่อผลการเรียนรู้</span></div>
-        <div><strong>3×</strong><span>โอกาสมีส่วนร่วม เมื่อผู้เรียน<br/>มีตัวเลือกและเห็นความหมาย</span></div>
+        <div><strong>หลายทาง</strong><span>ให้ผู้เรียนเข้าถึงสาระสำคัญ<br/>และแสดงความเข้าใจได้ยืดหยุ่น</span></div>
+        <div><strong>ต่อเนื่อง</strong><span>ใช้หลักฐานระหว่างเรียน<br/>เพื่อเลือกก้าวถัดไปที่เหมาะสม</span></div>
+        <div><strong>มีเสียง</strong><span>ชวนผู้เรียนร่วมตั้งเป้าหมาย<br/>สะท้อนผล และออกแบบทางเลือก</span></div>
       </section>
 
       <section className="knowledge-hub" aria-labelledby="hub-title">
@@ -149,11 +156,11 @@ export default function Home() {
             <article className="topic-card" key={topic[1]}>
               <div className={`topic-symbol c${index}`}>{topic[0]}</div><span className="topic-tag">{topic[3]}</span>
               <h3>{topic[1]}</h3><p>{topic[2]}</p>
-              <button onClick={() => { setQuery(topic[1]); setSearchOpen(true); }}>เปิดบทเรียน <Arrow /></button>
+              <a className="topic-link" href={`/knowledge#${topic[4]}`}>เปิดบทเรียน <Arrow /></a>
             </article>
           ))}
         </div>
-        <button className="outline-button" onClick={() => setSearchOpen(true)}>ดูคลังความรู้ทั้งหมด <Arrow /></button>
+        <a className="outline-button" href="/knowledge">ดูคลังความรู้ทั้งหมด <Arrow /></a>
       </section>
 
       <section className="toolkit-section" id="tools">
@@ -202,9 +209,9 @@ export default function Home() {
       <section className="cases-section" id="cases">
         <div className="section-heading split-heading"><div><span className="section-kicker left">BEST PRACTICE LIBRARY</span><h2>เรื่องจริงจากห้องเรียน</h2></div><p>กรณีศึกษาที่เล่าทั้งโจทย์ กระบวนการ หลักฐาน และสิ่งที่ครูเรียนรู้—ไม่ใช่สูตรสำเร็จ</p></div>
         <div className="case-grid">
-          <article className="case-feature"><div className="case-art"><span>ก่อน</span><i/><span>หลัง</span><div className="mini-class"><b>◯ ◯ ◯</b><b>△ ◯ △</b><b>◯ △ ◯</b></div></div><div className="case-body"><span className="case-tag">UDL · ชั้นประถมศึกษา</span><h3>เมื่อ “เลือกวิธีตอบได้” เด็กที่เงียบที่สุดก็เริ่มมีเสียง</h3><p>ครูวิทยาศาสตร์ปรับการสรุปบทเรียนจากใบงานแบบเดียว เป็น 3 ทางเลือก และพบหลักฐานการเรียนรู้ที่ไม่เคยเห็นมาก่อน</p><div><span>อ่าน 8 นาที</span><a href="#case-detail">อ่านกรณีศึกษา <Arrow /></a></div></div></article>
-          <article className="case-small"><span className="case-tag teal-tag">MOTIVATION · มัธยมศึกษา</span><h3>จาก “ไม่ส่งงาน” สู่การเห็นเป้าหมายที่มีความหมาย</h3><p>บทสนทนา 10 นาทีที่ช่วยครูค้นพบอุปสรรคจริง และออกแบบก้าวแรกไปกับผู้เรียน</p><a href="#case-detail">อ่านเรื่องนี้ <Arrow /></a></article>
-          <article className="case-small"><span className="case-tag violet-tag">DIFFERENTIATION</span><h3>หนึ่งเป้าหมาย สามระดับการพยุง</h3><p>ออกแบบ Scaffolding ให้ผู้เรียนทุกคนไปถึงเป้าหมายเดียวกัน โดยไม่ลดความคาดหวัง</p><a href="#case-detail">อ่านเรื่องนี้ <Arrow /></a></article>
+          <article className="case-feature"><div className="case-art"><span>ก่อน</span><i/><span>หลัง</span><div className="mini-class"><b>◯ ◯ ◯</b><b>△ ◯ △</b><b>◯ △ ◯</b></div></div><div className="case-body"><span className="case-tag">UDL · ชั้นประถมศึกษา</span><h3>เมื่อ “เลือกวิธีตอบได้” เด็กที่เงียบที่สุดก็เริ่มมีเสียง</h3><p>ครูวิทยาศาสตร์ปรับการสรุปบทเรียนจากใบงานแบบเดียว เป็น 3 ทางเลือก และพบหลักฐานการเรียนรู้ที่ไม่เคยเห็นมาก่อน</p><div><span>อ่าน 8 นาที</span><a href="/cases#voice-choice">อ่านกรณีศึกษา <Arrow /></a></div></div></article>
+          <article className="case-small"><span className="case-tag teal-tag">MOTIVATION · มัธยมศึกษา</span><h3>จาก “ไม่ส่งงาน” สู่การเห็นเป้าหมายที่มีความหมาย</h3><p>บทสนทนา 10 นาทีที่ช่วยครูค้นพบอุปสรรคจริง และออกแบบก้าวแรกไปกับผู้เรียน</p><a href="/cases#meaningful-goals">อ่านเรื่องนี้ <Arrow /></a></article>
+          <article className="case-small"><span className="case-tag violet-tag">DIFFERENTIATION</span><h3>หนึ่งเป้าหมาย สามระดับการพยุง</h3><p>ออกแบบ Scaffolding ให้ผู้เรียนทุกคนไปถึงเป้าหมายเดียวกัน โดยไม่ลดความคาดหวัง</p><a href="/cases#scaffolding">อ่านเรื่องนี้ <Arrow /></a></article>
         </div>
       </section>
 
@@ -220,11 +227,13 @@ export default function Home() {
         <div className="resource-column" id="resources"><span className="section-kicker left">DOWNLOAD CENTER</span><h2>หยิบไปใช้ได้เลย</h2><div className="download-list"><a href="/downloads/learner-observation.xlsx" download><span>▤</span><div><strong>แบบสังเกตผู้เรียนรายบุคคล</strong><small>XLSX · แก้ไขได้ · 2 แผ่นงาน</small></div><b>↓</b></a><a href="/downloads/learner-profile-template.docx" download><span>▧</span><div><strong>Learner Profile Template</strong><small>DOCX · พร้อมช่องกรอกและคำแนะนำ</small></div><b>↓</b></a><a href="/downloads/intervention-plan.pdf" download><span>◎</span><div><strong>แผนช่วยเหลือรายบุคคล</strong><small>PDF · พร้อมพิมพ์ · 1 หน้า</small></div><b>↓</b></a></div></div>
       </section>
 
-      <section className="final-cta"><span className="cta-orbit o1"/><span className="cta-orbit o2"/><div><span className="section-kicker light">EVERY CHILD CAN LEARN</span><h2>เมื่อครูเข้าใจ<br/>เด็กทุกคนมีโอกาสเติบโต</h2><p>เริ่มจากผู้เรียนหนึ่งคน บทเรียนหนึ่งคาบ และการเปลี่ยนแปลงเล็ก ๆ วันนี้</p><a className="primary-button white" href="#tools">เริ่มทำความเข้าใจผู้เรียน <Arrow /></a></div></section>
+      <section className="home-about" id="about"><div><span className="section-kicker left">ABOUT LEARNERLENS</span><h2>สร้างขึ้นเพื่อช่วยครูเข้าใจ และตอบสนองความแตกต่างของผู้เรียน</h2><p>เว็บไซต์นี้รวบรวมความรู้ เครื่องมือ และตัวช่วยสำหรับเปลี่ยนการสังเกตในห้องเรียนให้เป็นการออกแบบการเรียนรู้ที่ยืดหยุ่น เห็นคุณค่า และนำไปใช้ได้จริง</p><a className="text-link" href="/about">อ่านจุดประสงค์และที่มา <Arrow /></a></div><aside><small>ผู้จัดทำ</small><strong>Boorapatis Ploysuwan</strong><span>ผู้วิจัยอิสระ</span><a href="mailto:burapatis@gmail.com">burapatis@gmail.com</a></aside></section>
 
-      <footer><div className="footer-brand"><a className="brand" href="#top"><span className="brand-mark"><i/><i/><i/></span><span>Learner<span>Lens</span></span></a><p>Understand Every Learner.<br/>Teach for Differences.</p></div><div><strong>เรียนรู้</strong><a href="#knowledge">คลังความรู้</a><a href="#paths">เส้นทางการเรียนรู้</a><a href="#cases">กรณีศึกษา</a></div><div><strong>ลงมือทำ</strong><a href="#tools">เครื่องมือวิเคราะห์</a><a href="#coach">AI Teacher Coach</a><a href="#resources">ดาวน์โหลด</a></div><div><strong>หลักการ</strong><a href="#principles">ความเป็นส่วนตัว</a><a href="#principles">การใช้ AI อย่างรับผิดชอบ</a><a href="#principles">การเข้าถึงสำหรับทุกคน</a></div><small>© 2026 LearnerLens · สร้างด้วยความเชื่อว่าเด็กทุกคนเรียนรู้ได้</small></footer>
+      <section className="final-cta"><span className="cta-orbit o1"/><span className="cta-orbit o2"/><div><span className="section-kicker light">EVERY CHILD CAN LEARN</span><h2>เมื่อครูเข้าใจ<br/>เด็กทุกคนมีโอกาสเติบโต</h2><p>เริ่มจากผู้เรียนหนึ่งคน บทเรียนหนึ่งคาบ และการเปลี่ยนแปลงเล็ก ๆ วันนี้</p><a className="primary-button white" href="/toolkit">เริ่มทำความเข้าใจผู้เรียน <Arrow /></a></div></section>
 
-      {searchOpen && <div className="search-modal" role="dialog" aria-modal="true" aria-label="ค้นหาคลังความรู้" onMouseDown={(event)=>{if(event.currentTarget===event.target)setSearchOpen(false)}}><div className="search-box"><div className="search-input"><span>⌕</span><input autoFocus value={query} onChange={(event)=>setQuery(event.target.value)} placeholder="ค้นหาหัวข้อ เช่น UDL, แรงจูงใจ..."/><button onClick={()=>setSearchOpen(false)}>ESC</button></div><div className="search-results">{filteredTopics.map(topic=><button key={topic[1]} onClick={()=>setSearchOpen(false)}><span>{topic[0]}</span><div><strong>{topic[1]}</strong><small>{topic[2]}</small></div><Arrow/></button>)}{filteredTopics.length===0&&<p>ยังไม่พบหัวข้อนี้ ลองใช้คำค้นอื่น</p>}</div></div></div>}
+      <SiteFooter />
+
+      {searchOpen && <div className="search-modal" role="dialog" aria-modal="true" aria-label="ค้นหาคลังความรู้"><div className="search-box"><div className="search-input"><span>⌕</span><input value={query} onChange={(event)=>setQuery(event.target.value)} onKeyDown={(event)=>{if(event.key==="Escape")setSearchOpen(false)}} placeholder="ค้นหาหัวข้อ เช่น UDL, แรงจูงใจ..."/><button onClick={()=>setSearchOpen(false)}>ESC</button></div><div className="search-results">{filteredTopics.map(topic=><a key={topic[1]} href={`/knowledge#${topic[4]}`} onClick={()=>setSearchOpen(false)}><span>{topic[0]}</span><div><strong>{topic[1]}</strong><small>{topic[2]}</small></div><Arrow/></a>)}{filteredTopics.length===0&&<p>ยังไม่พบหัวข้อนี้ ลองใช้คำค้นอื่น</p>}</div></div></div>}
     </main>
   );
 }

@@ -1,0 +1,18 @@
+import type { ReactNode } from "react";
+import Link from "next/link";
+
+export function Brand() {
+  return <Link className="brand" href="/" aria-label="LearnerLens หน้าแรก"><span className="brand-mark" aria-hidden="true"><i/><i/><i/></span><span>Learner<span>Lens</span></span></Link>;
+}
+
+export function SubHeader() {
+  return <header className="site-header sub-header"><Brand/><nav className="nav" aria-label="เมนูหลัก"><a href="/knowledge">คลังความรู้</a><a href="/toolkit">เครื่องมือ</a><a href="/paths">เส้นทางการเรียนรู้</a><a href="/cases">กรณีศึกษา</a><a href="/about">เกี่ยวกับโครงการ</a></nav><a className="coach-button" href="/coach">ลอง AI Coach <span aria-hidden="true">→</span></a></header>;
+}
+
+export function SiteFooter() {
+  return <footer><div className="footer-brand"><Brand/><p>Understand Every Learner.<br/>Teach for Differences.</p></div><div><strong>เรียนรู้</strong><a href="/knowledge">คลังความรู้</a><a href="/paths">เส้นทางการเรียนรู้</a><a href="/cases">กรณีศึกษา</a></div><div><strong>ลงมือทำ</strong><a href="/toolkit">เครื่องมือวิเคราะห์</a><a href="/coach">AI Teacher Coach</a><a href="/downloads">ดาวน์โหลด</a><a href="/prompts">Prompt Library</a></div><div><strong>เกี่ยวกับ</strong><a href="/about">จุดประสงค์และผู้จัดทำ</a><a href="/principles#privacy">ความเป็นส่วนตัว</a><a href="/principles#responsible-ai">การใช้ AI อย่างรับผิดชอบ</a><a href="/principles#accessibility">การเข้าถึงสำหรับทุกคน</a></div><small>© 2026 LearnerLens · จัดทำโดย Boorapatis Ploysuwan นักวิจัยอิสระ</small></footer>;
+}
+
+export function SubPage({ eyebrow, title, description, children }: { eyebrow: string; title: string; description: string; children: ReactNode }) {
+  return <><SubHeader/><main className="subpage"><section className="subpage-hero"><div><span className="section-kicker left">{eyebrow}</span><h1>{title}</h1><p>{description}</p></div></section>{children}</main><SiteFooter/></>;
+}

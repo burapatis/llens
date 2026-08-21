@@ -1,0 +1,13 @@
+import type { Metadata } from "next";
+import { SubPage } from "../_components/SiteChrome";
+
+export const metadata: Metadata = {
+  title: "หลักการใช้งาน | LearnerLens",
+  description: "ความเป็นส่วนตัว การใช้ AI อย่างรับผิดชอบ และการเข้าถึงสำหรับทุกคน",
+  openGraph: { title: "หลักการใช้งาน | LearnerLens", description: "หลักการคุ้มครองผู้เรียนและการใช้งานแพลตฟอร์มอย่างรับผิดชอบ", images: [] },
+  twitter: { title: "หลักการใช้งาน | LearnerLens", description: "หลักการคุ้มครองผู้เรียนและการใช้งานอย่างรับผิดชอบ", images: [] },
+};
+
+export default function PrinciplesPage() {
+  return <SubPage eyebrow="TRUST & SAFETY" title="ใช้ข้อมูลและเทคโนโลยี โดยยึดประโยชน์ของผู้เรียนเป็นศูนย์กลาง" description="หลักการเหล่านี้ใช้กำกับการออกแบบเครื่องมือ เนื้อหา และ AI Teacher Coach ของ LearnerLens"><section className="subpage-section principle-stack" id="top"><article id="privacy"><div className="principle-icon">⌁</div><div><span className="section-kicker left">PRIVACY</span><h2>ความเป็นส่วนตัวของผู้เรียน</h2><p>เครื่องมือในเวอร์ชันนี้บันทึกข้อมูลไว้ใน Browser ของอุปกรณ์ ไม่ส่งขึ้นฐานข้อมูลกลาง ผู้ใช้ควรใช้รหัสแทนชื่อจริง และไม่ใส่ข้อมูลสุขภาพ ครอบครัว ที่อยู่ รูปภาพ หรือข้อมูลที่ระบุตัวตนได้ หากไม่จำเป็นต่อการวางแผนการสอน</p><ul><li>ใช้ข้อมูลเท่าที่จำเป็นและมีจุดประสงค์ชัดเจน</li><li>ให้ผู้เรียนมีส่วนรับรู้และตรวจสอบข้อมูลของตน</li><li>ทบทวนและลบข้อมูลเมื่อหมดความจำเป็น</li><li>ไม่ใช้ข้อมูลเพื่อจัดอันดับ ประจาน หรือติดป้าย</li></ul></div></article><article id="responsible-ai"><div className="principle-icon">✦</div><div><span className="section-kicker left">RESPONSIBLE AI</span><h2>การใช้ AI อย่างรับผิดชอบ</h2><p>AI เป็นผู้ช่วยคิด ไม่ใช่ผู้วินิจฉัยหรือผู้ตัดสินใจแทนครู คำแนะนำต้องผ่านการพิจารณาตามบริบท ตรวจสอบความถูกต้อง และทดลองอย่างมีหลักฐานก่อนนำไปใช้</p><ul><li>ลบชื่อและข้อมูลระบุตัวตนก่อนส่งข้อความ</li><li>ขอให้ AI แยกข้อเท็จจริง สมมติฐาน และสิ่งที่ต้องตรวจสอบ</li><li>หลีกเลี่ยงการวินิจฉัยความผิดปกติหรือสรุปเจตนาของผู้เรียน</li><li>ใช้วิจารณญาณวิชาชีพและปรึกษาผู้เชี่ยวชาญเมื่อจำเป็น</li></ul></div></article><article id="accessibility"><div className="principle-icon">◎</div><div><span className="section-kicker left">ACCESSIBILITY</span><h2>การเข้าถึงสำหรับทุกคน</h2><p>เว็บไซต์ออกแบบให้รองรับหน้าจอหลายขนาด การใช้แป้นพิมพ์ การลดการเคลื่อนไหว และโครงสร้างเนื้อหาที่โปรแกรมอ่านหน้าจอเข้าใจได้ เราจะพัฒนาตาม WCAG และรับฟังข้อเสนอแนะอย่างต่อเนื่อง</p><ul><li>ใช้โครงสร้างหัวข้อและป้ายกำกับที่ชัดเจน</li><li>ไม่ใช้สีเพียงอย่างเดียวเพื่อสื่อความหมาย</li><li>รักษาขนาดเป้าหมายการสัมผัสและคอนทราสต์</li><li>มีทางเลือกในการอ่าน ทำ และแสดงความเข้าใจ</li></ul></div></article></section></SubPage>;
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./pages.css";
 
 export const metadata: Metadata = {
   title: "LearnerLens — เข้าใจผู้เรียนทุกคน",
