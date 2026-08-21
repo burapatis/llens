@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outputDir = join(projectRoot, "pages-dist");
 const publicUrl = "https://llens.thamdee.com";
-const routes = ["/", "/start", "/knowledge", "/toolkit", "/paths", "/cases", "/case-finder", "/coach", "/follow-up", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
+const routes = ["/", "/start", "/knowledge", "/articles", "/articles/learning-psychology", "/articles/child-development", "/articles/individual-differences", "/articles/multiple-intelligences", "/articles/learning-preferences", "/articles/motivation", "/articles/executive-functions", "/articles/inclusive-education", "/articles/udl", "/articles/differentiation", "/articles/assessment-for-learning", "/editorial", "/toolkit", "/paths", "/cases", "/case-finder", "/coach", "/follow-up", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
 
 function pageFile(pathname) {
   return pathname === "/" ? join(outputDir, "index.html") : join(outputDir, pathname.slice(1), "index.html");

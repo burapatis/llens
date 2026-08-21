@@ -1,3 +1,5 @@
+/* Static anchors intentionally keep the GitHub Pages export dependency-free. */
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { SiteFooter, SubHeader } from "./_components/SiteChrome";
 
 export default function NotFound() {

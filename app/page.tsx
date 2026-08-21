@@ -1,5 +1,8 @@
 "use client";
 
+/* Static anchors intentionally keep the GitHub Pages export dependency-free. */
+/* eslint-disable @next/next/no-html-link-for-pages */
+
 import { useEffect, useState } from "react";
 import { SiteFooter } from "./_components/SiteChrome";
 import { GlobalSearch } from "./_components/GlobalSearch";
@@ -135,7 +138,7 @@ export default function Home() {
         </div>
         <div className="feature-grid">
           <article><span className="feature-number">01</span><div className="feature-icon blue">◉</div><h3>มองเห็นผู้เรียนทั้งคน</h3><p>เข้าใจมากกว่าคะแนน ผ่านพัฒนาการ แรงจูงใจ อารมณ์ และบริบทชีวิต</p><a href="/toolkit">เรียนรู้การวิเคราะห์ <Arrow /></a></article>
-          <article><span className="feature-number">02</span><div className="feature-icon teal">↗</div><h3>ออกแบบเพื่อความแตกต่าง</h3><p>ปรับเนื้อหา กระบวนการ และชิ้นงาน ให้ทุกคนเข้าถึงและท้าทายในระดับที่เหมาะสม</p><a href="/knowledge#udl">สำรวจแนวทาง UDL <Arrow /></a></article>
+          <article><span className="feature-number">02</span><div className="feature-icon teal">↗</div><h3>ออกแบบเพื่อความแตกต่าง</h3><p>ปรับเนื้อหา กระบวนการ และชิ้นงาน ให้ทุกคนเข้าถึงและท้าทายในระดับที่เหมาะสม</p><a href="/articles/udl">สำรวจแนวทาง UDL <Arrow /></a></article>
           <article><span className="feature-number">03</span><div className="feature-icon violet">✦</div><h3>เปลี่ยนข้อมูลเป็นการช่วยเหลือ</h3><p>ใช้หลักฐานเล็ก ๆ จากห้องเรียน วางแผน ลงมือ และติดตามการเติบโตอย่างต่อเนื่อง</p><a href="/coach">ลองวางแผนกับ AI <Arrow /></a></article>
         </div>
       </section>
@@ -156,11 +159,11 @@ export default function Home() {
             <article className="topic-card" key={topic[1]}>
               <div className={`topic-symbol c${index}`}>{topic[0]}</div><span className="topic-tag">{topic[3]}</span>
               <h3>{topic[1]}</h3><p>{topic[2]}</p>
-              <a className="topic-link" href={`/knowledge#${topic[4]}`}>เปิดบทเรียน <Arrow /></a>
+              <a className="topic-link" href={`/articles/${topic[4]}`}>เปิดบทเรียน <Arrow /></a>
             </article>
           ))}
         </div>
-        <a className="outline-button" href="/knowledge">ดูคลังความรู้ทั้งหมด <Arrow /></a>
+        <a className="outline-button" href="/articles">ดูบทความทั้งหมด <Arrow /></a>
       </section>
 
       <section className="toolkit-section" id="tools">

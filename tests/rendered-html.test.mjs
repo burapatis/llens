@@ -13,7 +13,7 @@ test("home renders real navigation and creator information", async () => {
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
-  for (const href of ["/start", "/knowledge", "/toolkit", "/paths", "/case-finder", "/coach", "/follow-up", "/data", "/about"]) assert.match(html, new RegExp(`href="${href}"`));
+  for (const href of ["/start", "/articles", "/knowledge", "/toolkit", "/paths", "/case-finder", "/coach", "/follow-up", "/data", "/about"]) assert.match(html, new RegExp(`href="${href}"`));
   assert.match(html, /ค้นหาทั้งเว็บไซต์/);
   assert.match(html, /ข้ามไปยังเนื้อหาหลัก/);
   assert.match(html, /Boorapatis Ploysuwan/);
@@ -22,7 +22,7 @@ test("home renders real navigation and creator information", async () => {
 });
 
 test("all destination pages server-render successfully", async () => {
-  const routes = ["/start", "/knowledge", "/toolkit", "/paths", "/cases", "/case-finder", "/coach", "/follow-up", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
+  const routes = ["/start", "/knowledge", "/articles", "/articles/udl", "/articles/learning-preferences", "/editorial", "/toolkit", "/paths", "/cases", "/case-finder", "/coach", "/follow-up", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
   for (const route of routes) {
     const response = await render(route);
     assert.equal(response.status, 200, route);
@@ -94,4 +94,17 @@ test("phase two supports a complete classroom action cycle", async () => {
   for (const text of ["ประเภทสถานการณ์", "ช่วงวัย", "ค้นหาสถานการณ์ที่ใกล้เคียง"]) assert.match(finder,new RegExp(text));
   for (const text of ["ฉบับเด็ก", "ฉบับครู", "สร้างแผนทดลอง 2–4 สัปดาห์"]) assert.match(toolkit,new RegExp(text));
   for (const text of ["แผนทดลองหนึ่งก้าว", "CHECK-IN LOG", "พิมพ์ / บันทึก PDF"]) assert.match(followUp,new RegExp(text));
+});
+
+test("phase three publishes standardized evidence-informed articles", async () => {
+  const [library, udl, preferences, editorial] = await Promise.all(["/articles", "/articles/udl", "/articles/learning-preferences", "/editorial"].map(route => render(route).then(response => response.text())));
+  assert.match(library, /11 หัวข้อ/);
+  assert.match(library, /มาตรฐานบทความ LearnerLens/);
+  for (const text of ["ผลลัพธ์การเรียนรู้", "สัญญาณที่ควรสังเกต", "สิ่งที่ควรทำ และสิ่งที่ควรหลีกเลี่ยง", "CHECKLIST", "REFLECTION QUESTIONS", "Action Canvas", "แหล่งอ้างอิงและอ่านต่อ", "Boorapatis Ploysuwan", "21 สิงหาคม 2026"]) assert.match(udl, new RegExp(text));
+  assert.match(preferences, /หลักฐานยังไม่สนับสนุนการจับคู่การสอนกับ Learning Style/);
+  assert.match(preferences, /Education Endowment Foundation/);
+  assert.match(editorial, /ยังไม่อ้างว่าเป็นการ Peer Review/);
+  assert.match(editorial, /แนวทางทางการ/);
+  assert.match(editorial, /หลักฐานสังเคราะห์/);
+  assert.match(editorial, /กรอบแนวคิด/);
 });
