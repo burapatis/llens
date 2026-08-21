@@ -1,0 +1,15 @@
+{
+  "name": "LearnerLens",
+  "tagline": "Understand Every Learner",
+  "routes": [
+    {"path": "/", "label": "หน้าแรก"},
+    {"path": "/knowledge", "label": "Knowledge Hub", "source": "MDX"},
+    {"path": "/toolkit", "label": "Learner Analysis Toolkit", "storage": "localStorage"},
+    {"path": "/coach", "label": "AI Teacher Coach"},
+    {"path": "/cases", "label": "Best Practice Library", "source": "MDX"},
+    {"path": "/downloads", "label": "Download Center"},
+    {"path": "/prompts", "label": "Prompt Library", "source": "JSON"},
+    {"path": "/assessment", "label": "Self-Assessment", "storage": "localStorage"},
+    {"path": "/paths", "label": "Learning Path", "storage": "localStorage"}
+  ]
+}
