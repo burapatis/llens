@@ -72,6 +72,7 @@ export default function Home() {
           <a href="/toolkit">เครื่องมือ</a>
           <a href="/paths">เส้นทางการเรียนรู้</a>
           <a href="/cases">กรณีศึกษา</a>
+          <a href="/about#how-to-use">วิธีใช้งาน</a>
           <a href="/about">เกี่ยวกับโครงการ</a>
         </nav>
         <div className="header-actions">

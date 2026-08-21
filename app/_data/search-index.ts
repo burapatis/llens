@@ -47,5 +47,6 @@ export const searchItems: SearchItem[] = [
   { title: "Prompt Library", description: "Prompt วิเคราะห์ ออกแบบกิจกรรม ประเมิน และสะท้อนผล", href: "/prompts", category: "ทรัพยากร", keywords: ["prompt", "AI"] },
   { title: "Download Center", description: "แบบสังเกต Learner Profile และ Intervention Plan", href: "/downloads", category: "ทรัพยากร", keywords: ["PDF", "DOCX", "XLSX", "ดาวน์โหลด"] },
   { title: "ศูนย์ข้อมูลในอุปกรณ์", description: "สำรอง นำเข้า และจัดการข้อมูล Local Storage", href: "/data", category: "ทรัพยากร", keywords: ["backup", "restore", "สำรองข้อมูล"] },
+  { title: "วิธีใช้งานเว็บไซต์ LearnerLens", description: "เริ่มจากโจทย์จริง เปิดความรู้ เก็บหลักฐาน ออกแบบ และติดตามผลใน 5 ขั้นตอน", href: "/about#how-to-use", category: "ทรัพยากร", keywords: ["คู่มือ", "วิธีใช้", "เริ่มต้น", "ขั้นตอน"] },
   { title: "หลักการความเป็นส่วนตัว", description: "ใช้ข้อมูลเท่าที่จำเป็นและไม่ติดป้ายผู้เรียน", href: "/principles#privacy", category: "ทรัพยากร", keywords: ["privacy", "ข้อมูลส่วนบุคคล"] },
 ];

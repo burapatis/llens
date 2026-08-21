@@ -30,6 +30,15 @@ test("all destination pages server-render successfully", async () => {
   }
 });
 
+test("about page includes the usage guide and creator portrait", async () => {
+  const html = await render("/about").then(response => response.text());
+  assert.match(html, /id="how-to-use"/);
+  assert.match(html, /ตั้งคำถามที่อยากแก้/);
+  assert.match(html, /เข้าใจ–สังเกต–ออกแบบ–ติดตาม/);
+  assert.match(html, /boorapatis-ploysuwan\.jpg/);
+  assert.match(html, /Boorapatis Ploysuwan ผู้จัดทำเว็บไซต์ LearnerLens/);
+});
+
 test("publishes crawler discovery files", async () => {
   const sitemap = await render("/sitemap.xml");
   const robots = await render("/robots.txt");
