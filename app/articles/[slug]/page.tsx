@@ -6,6 +6,7 @@ import { SubHeader, SiteFooter } from "../../_components/SiteChrome";
 import { getKnowledgeArticle, knowledgeArticles } from "../../_data/articles";
 import { siteUrl } from "../../_data/site";
 import { ArticleActions } from "../ArticleActions";
+import { ArticleHeader, ChecklistBlock, ClassroomExample, DownloadBlock, KeyTakeaway, ReferenceList, ReflectionBlock, TheoryNote } from "@/components/content/ArticleBlocks";
 
 export function generateStaticParams() {
   return knowledgeArticles.map((article) => ({ slug: article.slug }));
@@ -50,14 +51,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <SubHeader />
       <main className="knowledge-article-page" id="main-content">
         <article id="knowledge-article">
-          <header className="knowledge-article-hero">
-            <div className="article-breadcrumb"><a href="/articles">บทความ</a><span aria-hidden="true">/</span><span>{article.englishTitle}</span></div>
-            <span className="section-kicker left">EVIDENCE-INFORMED ARTICLE</span>
-            <h1>{article.title}</h1>
-            <p>{article.description}</p>
-            <div className="knowledge-article-meta"><span>อ่านประมาณ {article.readingMinutes} นาที</span><span>ทบทวนล่าสุด 21 สิงหาคม 2026</span><span>สถานะ: ทบทวนเบื้องต้น</span></div>
-            <ArticleActions />
-          </header>
+          <ArticleHeader eyebrow="EVIDENCE-INFORMED ARTICLE" title={article.title} description={article.description} meta={[`อ่านประมาณ ${article.readingMinutes} นาที`, "ทบทวนล่าสุด 21 สิงหาคม 2026", "สถานะ: ทบทวนเบื้องต้น"]} breadcrumb={<div className="article-breadcrumb"><a href="/articles">บทความ</a><span aria-hidden="true">/</span><span>{article.englishTitle}</span></div>} actions={<ArticleActions />} />
 
           <div className="knowledge-article-layout">
             <aside className="article-toc no-print" aria-label="สารบัญบทความ">
@@ -74,7 +68,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             </aside>
 
             <div className="knowledge-article-body">
-              <aside className="evidence-caution"><strong>ขอบเขตหลักฐาน</strong><p>{article.evidenceNote}</p></aside>
+              <KeyTakeaway>{article.keyIdeas[0].text}</KeyTakeaway>
+              <TheoryNote>{article.evidenceNote}</TheoryNote>
 
               <section id="outcomes">
                 <span className="section-kicker left">LEARNING OUTCOMES</span>
@@ -95,11 +90,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 <div className="signal-grid">{article.signals.map((signal) => <div key={signal}><span aria-hidden="true">↗</span><p>{signal}</p></div>)}</div>
               </section>
 
-              <section id="example" className="classroom-example">
-                <span className="section-kicker left">CLASSROOM EXAMPLE</span>
-                <h2>ตัวอย่างในห้องเรียน</h2>
-                <dl><div><dt>บริบท</dt><dd>{article.classroomExample.context}</dd></div><div><dt>สิ่งที่ครูลอง</dt><dd>{article.classroomExample.action}</dd></div><div><dt>หลักฐานที่ติดตาม</dt><dd>{article.classroomExample.evidence}</dd></div></dl>
-              </section>
+              <ClassroomExample context={article.classroomExample.context} action={article.classroomExample.action} evidence={article.classroomExample.evidence} />
 
               <section id="do-avoid">
                 <span className="section-kicker left">DO / AVOID</span>
@@ -107,17 +98,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 <div className="do-avoid-grid"><article><h3>ควรทำ</h3><ul>{article.doItems.map((item) => <li key={item}>{item}</li>)}</ul></article><article><h3>ควรหลีกเลี่ยง</h3><ul>{article.avoidItems.map((item) => <li key={item}>{item}</li>)}</ul></article></div>
               </section>
 
-              <section id="checklist" className="article-checklist-section">
-                <span className="section-kicker left">CHECKLIST</span>
-                <h2>เช็กก่อนนำไปใช้</h2>
-                <ul>{article.checklist.map((item) => <li key={item}><span aria-hidden="true" />{item}</li>)}</ul>
-              </section>
+              <ChecklistBlock items={article.checklist} />
 
-              <section id="reflection">
-                <span className="section-kicker left">REFLECTION QUESTIONS</span>
-                <h2>คำถามสะท้อนคิด</h2>
-                <ol className="reflection-list">{article.reflections.map((item, index) => <li key={item}><span>{index + 1}</span><p>{item}</p></li>)}</ol>
-              </section>
+              <ReflectionBlock items={article.reflections} />
 
               <section id="action-canvas" className="action-canvas">
                 <span className="section-kicker left">DOWNLOADABLE TEMPLATE</span>
@@ -127,11 +110,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 <a className="no-print" href="/follow-up">นำไปสร้างแผนติดตาม 2–4 สัปดาห์ →</a>
               </section>
 
-              <section id="references" className="article-references">
-                <span className="section-kicker left">REFERENCES</span>
-                <h2>แหล่งอ้างอิงและอ่านต่อ</h2>
-                <ol>{article.sources.map((source) => <li key={source.url}><div><span>{source.kind}</span><strong>{source.title}</strong><small>{source.organization}</small></div><a href={source.url} target="_blank" rel="noreferrer">เปิดแหล่งต้นฉบับ ↗</a></li>)}</ol>
-              </section>
+              <DownloadBlock>ใช้แบบสังเกต Learner Profile หรือแผนช่วยเหลือเพื่อบันทึกก้าวทดลองและหลักฐานจากห้องเรียน</DownloadBlock>
+
+              <ReferenceList sources={article.sources} />
 
               <footer className="article-editorial-note">
                 <div><strong>ข้อมูลการทบทวน</strong><p>เรียบเรียงและทบทวนเบื้องต้นโดย Boorapatis Ploysuwan ผู้วิจัยอิสระ · ทบทวนล่าสุด 21 สิงหาคม 2026 · กำหนดทบทวนอย่างน้อยทุก 12 เดือนหรือเมื่อแหล่งหลักเปลี่ยนแปลง</p></div>

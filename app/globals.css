@@ -1,7 +1,19 @@
 @import "tailwindcss";
 
-:root { --blue:#2563eb; --blue-dark:#163a8a; --teal:#0f766e; --violet:#7c3aed; --ink:#13213c; --muted:#64748b; --line:#dce5f1; --mist:#f4f8fd; --paper:#fff; }
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Noto Sans Thai",sans-serif} a{text-decoration:none;color:inherit} button{font:inherit}
+:root {
+  /* Brand and semantic color tokens */
+  --blue:#2563eb; --blue-dark:#163a8a; --teal:#0f766e; --violet:#7c3aed; --purple:var(--violet);
+  --ink:#13213c; --muted:#64748b; --line:#dce5f1; --mist:#f4f8fd; --paper:#fff;
+  --surface-subtle:#f7f9fc; --surface-info:#eaf1ff; --surface-success:#e8f8f3; --surface-reflection:#f1eaff; --surface-warning:#fff8e8; --surface-danger:#fff2f0;
+  --text-on-brand:#fff; --focus:#f59e0b; --danger:#a33f37;
+  /* 8px spacing, radius, elevation and type scales */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:18px; --radius-xl:24px; --radius-pill:999px;
+  --shadow-sm:0 8px 24px #213c7210; --shadow-md:0 18px 44px #213c721a;
+  --text-xs:.75rem; --text-sm:.875rem; --text-md:1rem; --text-lg:1.125rem; --text-xl:1.5rem; --text-display:clamp(2.5rem,5vw,4.5rem);
+  --content-width:1240px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Noto Sans Thai",sans-serif;line-height:1.5} a{text-decoration:none;color:inherit} button,input,textarea,select{font:inherit} ::selection{background:#cfe0ff;color:#10234c}
 .site-header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,78px);border-bottom:1px solid #e6edf6;position:relative;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(14px)}
 .brand{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:800;letter-spacing:-.5px}.brand>span:last-child span{color:var(--blue)}.brand-mark{width:35px;height:35px;border-radius:11px;background:var(--blue);display:flex;align-items:flex-end;justify-content:center;gap:3px;padding:8px;transform:rotate(-5deg);box-shadow:0 8px 18px #2563eb33}.brand-mark i{display:block;width:4px;background:#fff;border-radius:5px}.brand-mark i:nth-child(1){height:9px}.brand-mark i:nth-child(2){height:17px}.brand-mark i:nth-child(3){height:13px}
 .nav{display:flex;align-items:center;gap:30px;font-size:14px;font-weight:600;color:#41506a}.nav a:hover{color:var(--blue)}.header-actions{display:flex;align-items:center;gap:10px}.search-button{border:0;background:transparent;color:#53627a;padding:10px;cursor:pointer}.search-button span{font-size:20px}.coach-button,.primary-button{background:var(--blue);color:#fff;border-radius:10px;padding:12px 18px;font-size:14px;font-weight:700;box-shadow:0 8px 22px #2563eb2b;display:inline-flex;gap:18px;align-items:center}.menu-button{display:none;border:0;background:transparent;font-size:24px}

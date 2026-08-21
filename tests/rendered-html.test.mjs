@@ -22,7 +22,7 @@ test("home renders real navigation and creator information", async () => {
 });
 
 test("all destination pages server-render successfully", async () => {
-  const routes = ["/start", "/knowledge", "/articles", "/articles/udl", "/articles/learning-preferences", "/editorial", "/toolkit", "/paths", "/cases", "/case-finder", "/coach", "/follow-up", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
+  const routes = ["/start", "/knowledge", "/articles", "/articles/udl", "/articles/learning-preferences", "/editorial", "/design-system", "/toolkit", "/paths", "/cases", "/case-finder", "/coach", "/follow-up", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
   for (const route of routes) {
     const response = await render(route);
     assert.equal(response.status, 200, route);
@@ -107,4 +107,11 @@ test("phase three publishes standardized evidence-informed articles", async () =
   assert.match(editorial, /แนวทางทางการ/);
   assert.match(editorial, /หลักฐานสังเคราะห์/);
   assert.match(editorial, /กรอบแนวคิด/);
+});
+
+test("phase four exposes a reusable accessible design system", async () => {
+  const [designSystem, article, search] = await Promise.all(["/design-system", "/articles/udl", "/"].map(route => render(route).then(response => response.text())));
+  for (const text of ["Foundations", "Button", "Badge", "Progress", "Range", "Modal", "Learner Snapshot", "AI Coach Composer", "Search Result", "Resource Row", "Content Components", "Accessibility Contract", "WCAG AA", "44×44px"]) assert.match(designSystem, new RegExp(text, "i"));
+  for (const text of ["Key takeaway", "ขอบเขตหลักฐาน", "ตัวอย่างในห้องเรียน", "เช็กก่อนนำไปใช้", "คำถามสะท้อนคิด", "แบบฟอร์มพร้อมใช้", "แหล่งอ้างอิงและอ่านต่อ"]) assert.match(article, new RegExp(text));
+  assert.match(search, /href="\/design-system"/);
 });

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui";
 
 export function ArticleActions() {
   const [copied, setCopied] = useState(false);
@@ -23,8 +24,8 @@ export function ArticleActions() {
 
   return (
     <div className="article-actions no-print" aria-label="เครื่องมือบทความ">
-      <button type="button" className="primary-button" onClick={printArticle}>พิมพ์ / บันทึก PDF</button>
-      <button type="button" className="outline-button" onClick={copyLink}>{copied ? "คัดลอกลิงก์แล้ว" : "คัดลอกลิงก์"}</button>
+      <Button type="button" onClick={printArticle}>พิมพ์ / บันทึก PDF</Button>
+      <Button type="button" variant="outline" onClick={copyLink}>{copied ? "คัดลอกลิงก์แล้ว" : "คัดลอกลิงก์"}</Button>
     </div>
   );
 }

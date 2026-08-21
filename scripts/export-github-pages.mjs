@@ -22,6 +22,7 @@ const routes = [
   "/articles/differentiation",
   "/articles/assessment-for-learning",
   "/editorial",
+  "/design-system",
   "/start",
   "/toolkit",
   "/paths",
