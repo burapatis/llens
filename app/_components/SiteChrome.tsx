@@ -1,9 +1,8 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { GlobalSearch } from "./GlobalSearch";
 
 export function Brand() {
-  return <Link className="brand" href="/" aria-label="LearnerLens หน้าแรก"><span className="brand-mark" aria-hidden="true"><i/><i/><i/></span><span>Learner<span>Lens</span></span></Link>;
+  return <a className="brand" href="/" aria-label="เรียนรู้ผู้เรียน LearnerLens หน้าแรก"><span className="brand-mark" aria-hidden="true"><i/><i/><i/></span><span>Learner<span>Lens</span></span></a>;
 }
 
 export function SubHeader() {

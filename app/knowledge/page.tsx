@@ -4,7 +4,8 @@ import { SubPage } from "../_components/SiteChrome";
 export const metadata: Metadata = {
   title: "คลังความรู้ | LearnerLens",
   description: "ความรู้สำหรับครูเรื่องจิตวิทยาการเรียนรู้ พัฒนาการ UDL การสอนที่ตอบสนองความแตกต่าง และการศึกษาแบบเรียนรวม",
-  openGraph: { title: "คลังความรู้ | LearnerLens", description: "ทฤษฎี งานวิจัย ตัวอย่าง Checklist และคำถามสะท้อนคิดสำหรับครู", images: [] },
+  alternates: { canonical: "/knowledge" },
+  openGraph: { title: "คลังความรู้ | LearnerLens", description: "ทฤษฎี งานวิจัย ตัวอย่าง Checklist และคำถามสะท้อนคิดสำหรับครู", url: "/knowledge", images: [] },
   twitter: { title: "คลังความรู้ | LearnerLens", description: "ทฤษฎี งานวิจัยและตัวอย่างที่นำไปใช้ได้จริง", images: [] },
 };
 

@@ -4,7 +4,8 @@ import { SubPage } from "../_components/SiteChrome";
 export const metadata: Metadata = {
   title: "หลักการใช้งาน | LearnerLens",
   description: "ความเป็นส่วนตัว การใช้ AI อย่างรับผิดชอบ และการเข้าถึงสำหรับทุกคน",
-  openGraph: { title: "หลักการใช้งาน | LearnerLens", description: "หลักการคุ้มครองผู้เรียนและการใช้งานแพลตฟอร์มอย่างรับผิดชอบ", images: [] },
+  alternates: { canonical: "/principles" },
+  openGraph: { title: "หลักการใช้งาน | LearnerLens", description: "หลักการคุ้มครองผู้เรียนและการใช้งานแพลตฟอร์มอย่างรับผิดชอบ", url: "/principles", images: [] },
   twitter: { title: "หลักการใช้งาน | LearnerLens", description: "หลักการคุ้มครองผู้เรียนและการใช้งานอย่างรับผิดชอบ", images: [] },
 };
 

@@ -50,6 +50,16 @@ test("publishes crawler discovery files", async () => {
   assert.match(await robots.text(),/Sitemap:/);
 });
 
+test("invalid links return a useful 404 page", async () => {
+  const response = await render("/page-that-does-not-exist");
+  assert.equal(response.status, 404);
+  const html = await response.text();
+  assert.match(html, /ไม่พบหน้าที่ต้องการ/);
+  for (const href of ["/", "/knowledge", "/toolkit"]) {
+    assert.match(html, new RegExp(`href="${href}"`));
+  }
+});
+
 test("deep-link targets exist on knowledge, cases and principles pages", async () => {
   const [knowledge, cases, principles] = await Promise.all([render("/knowledge").then(r=>r.text()), render("/cases").then(r=>r.text()), render("/principles").then(r=>r.text())]);
   for (const id of ["learning-psychology", "child-development", "individual-differences", "motivation", "udl", "differentiation"]) assert.match(knowledge, new RegExp(`id="${id}"`));

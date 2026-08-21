@@ -4,9 +4,11 @@ import { SubPage } from "../_components/SiteChrome";
 export const metadata: Metadata = {
   title: "เกี่ยวกับโครงการและวิธีใช้งาน | LearnerLens",
   description: "จุดประสงค์ วิธีใช้งานอย่างมีประสิทธิภาพ และข้อมูลผู้จัดทำเว็บไซต์ LearnerLens",
+  alternates: { canonical: "/about" },
   openGraph: {
     title: "เกี่ยวกับโครงการและวิธีใช้งาน | LearnerLens",
     description: "รู้จัก LearnerLens และเริ่มใช้งานผ่าน 5 ขั้นตอนง่าย ๆ สำหรับครู",
+    url: "/about",
     images: [{ url: "/images/boorapatis-ploysuwan.jpg", width: 800, height: 1000, alt: "Boorapatis Ploysuwan ผู้จัดทำ LearnerLens" }],
   },
   twitter: {

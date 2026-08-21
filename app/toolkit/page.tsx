@@ -5,7 +5,8 @@ import ToolkitClient from "./ToolkitClient";
 export const metadata: Metadata = {
   title: "เครื่องมือวิเคราะห์ผู้เรียน | LearnerLens",
   description: "เครื่องมือค้นหาความสนใจและศักยภาพ แบบสังเกต สัมภาษณ์ Rubric และ Learner Profile ที่บันทึกในอุปกรณ์",
-  openGraph: { title: "เครื่องมือวิเคราะห์ผู้เรียน | LearnerLens", description: "ค้นหาสัญญาณความสนใจและเปลี่ยนการสังเกตเป็นข้อมูลที่ใช้วางแผนการสอนได้", images: [] },
+  alternates: { canonical: "/toolkit" },
+  openGraph: { title: "เครื่องมือวิเคราะห์ผู้เรียน | LearnerLens", description: "ค้นหาสัญญาณความสนใจและเปลี่ยนการสังเกตเป็นข้อมูลที่ใช้วางแผนการสอนได้", url: "/toolkit", images: [] },
   twitter: { title: "เครื่องมือวิเคราะห์ผู้เรียน | LearnerLens", description: "เครื่องมือสำหรับครูที่ไม่ติดป้ายผู้เรียน", images: [] },
 };
 

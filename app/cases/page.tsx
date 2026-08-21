@@ -4,7 +4,8 @@ import { SubPage } from "../_components/SiteChrome";
 export const metadata: Metadata = {
   title: "กรณีศึกษาจากห้องเรียน | LearnerLens",
   description: "กรณีศึกษาการสังเกตและช่วยเหลือผู้เรียนด้านการเรียนรู้ ครอบครัว การบูลลี่ ความสัมพันธ์ สุขภาวะ และความต้องการจำเป็นเฉพาะบุคคล",
-  openGraph: { title: "กรณีศึกษาจากห้องเรียน | LearnerLens", description: "เรื่องจริงจำลองจากสถานการณ์ในห้องเรียนที่เน้นกระบวนการและการสะท้อนผล", images: [] },
+  alternates: { canonical: "/cases" },
+  openGraph: { title: "กรณีศึกษาจากห้องเรียน | LearnerLens", description: "เรื่องจริงจำลองจากสถานการณ์ในห้องเรียนที่เน้นกระบวนการและการสะท้อนผล", url: "/cases", images: [] },
   twitter: { title: "กรณีศึกษาจากห้องเรียน | LearnerLens", description: "กรณีศึกษาที่ครูนำไปปรับใช้ได้", images: [] },
 };
 

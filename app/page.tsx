@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { SiteFooter } from "./_components/SiteChrome";
 import { GlobalSearch } from "./_components/GlobalSearch";
 
@@ -63,10 +62,10 @@ export default function Home() {
   return (
     <main id="main-content">
       <header className="site-header">
-        <Link className="brand" href="/" aria-label="Learner Lens หน้าแรก">
+        <a className="brand" href="/" aria-label="เรียนรู้ผู้เรียน LearnerLens หน้าแรก">
           <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
           <span>Learner<span>Lens</span></span>
-        </Link>
+        </a>
         <nav className={menuOpen ? "nav open" : "nav"} aria-label="เมนูหลัก">
           <a href="/knowledge">คลังความรู้</a>
           <a href="/toolkit">เครื่องมือ</a>

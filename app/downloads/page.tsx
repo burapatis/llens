@@ -4,7 +4,8 @@ import { SubPage } from "../_components/SiteChrome";
 export const metadata: Metadata = {
   title: "Download Center | LearnerLens",
   description: "ดาวน์โหลดแบบสังเกต Learner Profile และแผนช่วยเหลือรายบุคคล เพื่อนำไปใช้และปรับแก้ได้",
-  openGraph: { title: "Download Center | LearnerLens", description: "แบบฟอร์มพร้อมใช้สำหรับครู", images: [] },
+  alternates: { canonical: "/downloads" },
+  openGraph: { title: "Download Center | LearnerLens", description: "แบบฟอร์มพร้อมใช้สำหรับครู", url: "/downloads", images: [] },
   twitter: { title: "Download Center | LearnerLens", description: "แบบฟอร์มพร้อมใช้สำหรับครู", images: [] },
 };
 const downloads=[

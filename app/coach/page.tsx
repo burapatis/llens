@@ -5,7 +5,8 @@ import CoachClient from "./CoachClient";
 export const metadata: Metadata = {
   title: "AI Teacher Coach | LearnerLens",
   description: "ผู้ช่วยวิเคราะห์สถานการณ์ ตั้งคำถาม และสร้างแผนการสอน กิจกรรม แบบประเมิน และแผนช่วยเหลืออย่างรับผิดชอบ",
-  openGraph: { title: "AI Teacher Coach | LearnerLens", description: "เปลี่ยนข้อมูลการสังเกตเป็นแผนที่นำไปทดลองและติดตามผลได้", images: [] },
+  alternates: { canonical: "/coach" },
+  openGraph: { title: "AI Teacher Coach | LearnerLens", description: "เปลี่ยนข้อมูลการสังเกตเป็นแผนที่นำไปทดลองและติดตามผลได้", url: "/coach", images: [] },
   twitter: { title: "AI Teacher Coach | LearnerLens", description: "AI ผู้ช่วยคิดสำหรับครู", images: [] },
 };
 

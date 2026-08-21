@@ -5,7 +5,8 @@ import PathsClient from "./PathsClient";
 export const metadata: Metadata = {
   title: "เส้นทางการเรียนรู้สำหรับครู | LearnerLens",
   description: "เรียนรู้ตั้งแต่ความแตกต่างระหว่างบุคคลจนถึงการนำการเปลี่ยนแปลงด้วยข้อมูล พร้อมติดตามความก้าวหน้าใน Browser",
-  openGraph: { title: "เส้นทางการเรียนรู้ | LearnerLens", description: "Beginner ถึง Expert ในจังหวะของคุณ", images: [] },
+  alternates: { canonical: "/paths" },
+  openGraph: { title: "เส้นทางการเรียนรู้ | LearnerLens", description: "Beginner ถึง Expert ในจังหวะของคุณ", url: "/paths", images: [] },
   twitter: { title: "เส้นทางการเรียนรู้ | LearnerLens", description: "เส้นทางพัฒนาครู 4 ระดับ", images: [] },
 };
 
