@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import ToolkitExtras from "./ToolkitExtras";
+import InterestPotentialExplorer from "./InterestPotentialExplorer";
 
 type Profile = { code: string; strengths: string; interests: string; evidence: string; barriers: string; nextStep: string };
 const emptyProfile: Profile = { code: "", strengths: "", interests: "", evidence: "", barriers: "", nextStep: "" };
 const tools = [
+  ["✦", "Interest & Potential", "ให้เด็กหรือครูค้นหาสัญญาณความสนใจและศักยภาพที่กำลังเติบโต", "#interest-potential"],
   ["✓", "Learner Profile", "สังเคราะห์หลักฐาน จุดแข็ง อุปสรรค และก้าวถัดไป", "#profile-builder"],
   ["▤", "Observation Log", "บันทึกพฤติกรรม บริบท และสิ่งที่เกิดขึ้นอย่างเป็นกลาง", "#observation-log"],
   ["◇", "Interview Guide", "ฟังเสียงผู้เรียนผ่านคำถามปลายเปิดที่ไม่ชี้นำ", "#interview-guide"],
@@ -37,6 +39,7 @@ export default function ToolkitClient() {
 
   return <section className="subpage-section toolkit-page" id="top">
     <nav className="tool-card-grid" aria-label="เลือกเครื่องมือ">{tools.map(tool => <a href={tool[3]} key={tool[1]}><span>{tool[0]}</span><h2>{tool[1]}</h2><p>{tool[2]}</p><strong>เปิดเครื่องมือ →</strong></a>)}</nav>
+    <InterestPotentialExplorer />
     <div className="builder-layout">
       <aside className="builder-checklist"><span className="section-kicker left">QUALITY CHECK</span><h2>ก่อนสรุป Profile</h2><p>{checks.length}/{checklist.length} รายการพร้อม</p>{checklist.map((item,index)=><label className={checks.includes(index)?"checked":""} key={item}><input type="checkbox" checked={checks.includes(index)} onChange={()=>toggle(index)}/><span>{checks.includes(index)?"✓":""}</span>{item}</label>)}</aside>
       <form className="profile-builder" id="profile-builder" onSubmit={event=>{event.preventDefault();save();}}><div className="builder-head"><div><span className="section-kicker left">LEARNER PROFILE BUILDER</span><h2>ภาพผู้เรียนฉบับใช้งาน</h2></div><span>บันทึกใน Browser เท่านั้น</span></div>

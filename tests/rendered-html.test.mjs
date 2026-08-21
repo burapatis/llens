@@ -62,5 +62,10 @@ test("deep-link targets exist on knowledge, cases and principles pages", async (
 
 test("toolkit exposes every MVP tool target", async () => {
   const html = await render("/toolkit").then(response=>response.text());
-  for (const id of ["profile-builder", "observation-log", "interview-guide", "evidence-rubric"]) assert.match(html,new RegExp(`id="${id}"`));
+  for (const id of ["interest-potential", "profile-builder", "observation-log", "interview-guide", "evidence-rubric"]) assert.match(html,new RegExp(`id="${id}"`));
+  assert.match(html,/ฉันเป็นนักเรียน/);
+  assert.match(html,/ฉันเป็นครู/);
+  assert.match(html,/ไม่มีคำตอบถูกผิด/);
+  assert.match(html,/ไม่ใช้จัดอันดับเด็ก/);
+  assert.match(html,/แผนที่ความสนใจและศักยภาพ/);
 });
