@@ -64,10 +64,11 @@ test("invalid links return a useful 404 page", async () => {
 test("deep-link targets exist on knowledge, cases and principles pages", async () => {
   const [knowledge, cases, principles] = await Promise.all([render("/knowledge").then(r=>r.text()), render("/cases").then(r=>r.text()), render("/principles").then(r=>r.text())]);
   for (const id of ["learning-psychology", "child-development", "individual-differences", "motivation", "udl", "differentiation"]) assert.match(knowledge, new RegExp(`id="${id}"`));
-  for (const id of ["voice-choice", "meaningful-goals", "scaffolding", "external-supports", "responsive-assessment", "inclusive-dialogue", "family-instability", "violence-disclosure", "grief-caregiver", "repeated-bullying", "cyberbullying", "peer-conflict", "reading-difficulty", "cognitive-access", "language-not-ability", "twice-exceptional", "withdrawal-distress"]) assert.match(cases, new RegExp(`id="${id}"`));
+  for (const id of ["voice-choice", "meaningful-goals", "scaffolding", "external-supports", "responsive-assessment", "inclusive-dialogue", "family-instability", "violence-disclosure", "grief-caregiver", "repeated-bullying", "cyberbullying", "peer-conflict", "reading-difficulty", "cognitive-access", "language-not-ability", "twice-exceptional", "withdrawal-distress", "early-learning-pace", "early-transition-attention", "primary-processing-time", "primary-attention-support", "primary-intense-interest", "primary-social-reciprocity", "secondary-hyperfocus", "secondary-gaming-sleep", "secondary-peer-boundaries", "vocational-workshop-attention", "higher-reading-load", "higher-gaming-project"]) assert.match(cases, new RegExp(`id="${id}"`));
   assert.match(cases,/ศูนย์ช่วยเหลือสังคม/);
   assert.match(cases,/สายด่วนสุขภาพจิต 24 ชม\./);
   assert.match(cases,/ขอบเขตและการส่งต่อ/);
+  assert.match(cases,/ปฐมวัยถึงอุดมศึกษา/);
   for (const id of ["privacy", "responsible-ai", "accessibility"]) assert.match(principles, new RegExp(`id="${id}"`));
 });
 
@@ -92,7 +93,7 @@ test("AI Coach exposes a privacy-first three-step planning workflow", async () =
 test("phase two supports a complete classroom action cycle", async () => {
   const [start, finder, toolkit, followUp] = await Promise.all(["/start","/case-finder","/toolkit","/follow-up"].map(route=>render(route).then(response=>response.text())));
   for (const text of ["วันนี้ครูอยากตอบคำถามใด", "วงจร 5 ก้าวที่ใช้ซ้ำได้", "YOUR DEVICE"]) assert.match(start,new RegExp(text));
-  for (const text of ["ประเภทสถานการณ์", "ช่วงวัย", "ค้นหาสถานการณ์ที่ใกล้เคียง"]) assert.match(finder,new RegExp(text));
+  for (const text of ["ประเภทสถานการณ์", "ระดับการศึกษา", "ปฐมวัย", "อาชีวศึกษา", "อุดมศึกษา", "ค้นหาสถานการณ์ที่ใกล้เคียง"]) assert.match(finder,new RegExp(text));
   for (const text of ["ฉบับเด็ก", "ฉบับครู", "สร้างแผนทดลอง 2–4 สัปดาห์"]) assert.match(toolkit,new RegExp(text));
   for (const text of ["แผนทดลองหนึ่งก้าว", "CHECK-IN LOG", "พิมพ์ / บันทึก PDF"]) assert.match(followUp,new RegExp(text));
 });
