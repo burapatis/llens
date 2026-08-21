@@ -67,11 +67,11 @@ export default function Home() {
           <span>Learner<span>Lens</span></span>
         </a>
         <nav className={menuOpen ? "nav open" : "nav"} aria-label="เมนูหลัก">
+          <a href="/start">เริ่มใช้งาน</a>
           <a href="/knowledge">คลังความรู้</a>
           <a href="/toolkit">เครื่องมือ</a>
           <a href="/paths">เส้นทางการเรียนรู้</a>
-          <a href="/cases">กรณีศึกษา</a>
-          <a href="/about#how-to-use">วิธีใช้งาน</a>
+          <a href="/case-finder">ค้นหากรณี</a>
           <a href="/about">เกี่ยวกับโครงการ</a>
         </nav>
         <div className="header-actions">
@@ -120,6 +120,11 @@ export default function Home() {
 
       <section className="belief-strip" aria-label="แนวคิดหลัก">
         <p>UNDERSTAND EVERY LEARNER</p><span>✦</span><p>TEACH FOR DIFFERENCES</p><span>✦</span><p>EVERY CHILD CAN LEARN</p>
+      </section>
+
+      <section className="today-entry" aria-labelledby="today-entry-title">
+        <div><span className="section-kicker left">START TODAY · 10–30 นาที</span><h2 id="today-entry-title">มีโจทย์ในห้องเรียนอยู่แล้ว?<br/>เริ่มจากคำถามนั้นได้เลย</h2><p>เลือกเส้นทางสั้นที่ตรงกับสิ่งที่ครูต้องการทำวันนี้ แล้วค่อยเชื่อมข้อมูลเป็นวงจรติดตามผล</p><a className="primary-button" href="/start">เลือกจุดเริ่มต้น <Arrow /></a></div>
+        <div className="today-entry-grid"><a href="/case-finder"><span>⌕</span><strong>ค้นหากรณีใกล้เคียง</strong><small>กรองตามปัญหาและช่วงวัย</small></a><a href="/toolkit#interest-potential"><span>✦</span><strong>สำรวจความสนใจ</strong><small>ฉบับเด็กและฉบับครู</small></a><a href="/follow-up"><span>↗</span><strong>ติดตามผล 2–4 สัปดาห์</strong><small>บันทึกหลักฐานและปรับแผน</small></a></div>
       </section>
 
       <section className="why-section" id="knowledge">

@@ -63,6 +63,7 @@ export default function InterestPotentialExplorer() {
   const [answers, setAnswers] = useState<number[]>(() => Array(prompts.length).fill(-1));
   const [showResult, setShowResult] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [reportView, setReportView] = useState<Mode>("student");
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -72,6 +73,7 @@ export default function InterestPotentialExplorer() {
         const saved = JSON.parse(raw);
         if ((saved.mode === "student" || saved.mode === "teacher") && Array.isArray(saved.answers) && saved.answers.length === prompts.length) {
           setMode(saved.mode);
+          setReportView(saved.mode);
           setAnswers(saved.answers.map((value: unknown) => typeof value === "number" && value >= 0 && value <= 2 ? value : -1));
           setShowResult(true);
         }
@@ -101,6 +103,7 @@ export default function InterestPotentialExplorer() {
     setAnswers(Array(prompts.length).fill(-1));
     setShowResult(false);
     setCopied(false);
+    setReportView(nextMode);
   };
 
   const choose = (index: number, value: number) => {
@@ -111,7 +114,7 @@ export default function InterestPotentialExplorer() {
 
   const reveal = () => {
     if (completed !== prompts.length) return;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode, answers, savedAt: new Date().toISOString() }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode, answers, topSignals: topSignals.map(signal=>({id:signal.id,title:signal.title,percent:signal.percent,experiment:signal.experiments[0]})), savedAt: new Date().toISOString() }));
     setShowResult(true);
     requestAnimationFrame(() => document.querySelector("#interest-potential-result")?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
@@ -134,10 +137,16 @@ export default function InterestPotentialExplorer() {
     setCopied(true);
   };
 
+  const printReport = () => {
+    document.body.classList.add("print-interest-report");
+    window.addEventListener("afterprint",()=>document.body.classList.remove("print-interest-report"),{once:true});
+    window.print();
+  };
+
   return (
     <section className="interest-explorer" id="interest-potential" aria-labelledby="interest-potential-title">
       <header className="interest-explorer-head">
-        <div><span className="section-kicker left">INTEREST &amp; POTENTIAL EXPLORER</span><h2 id="interest-potential-title">ค้นหาสิ่งที่สนใจ และศักยภาพที่กำลังเติบโต</h2><p>ใช้เวลาประมาณ 5–8 นาที ไม่มีคำตอบถูกผิด และไม่ใช้จัดอันดับเด็ก ผลลัพธ์ช่วยตั้งสมมติฐานว่าจะเปิดโอกาสแบบใดต่อ</p></div>
+        <div><span className="section-kicker left">INTEREST &amp; POTENTIAL EXPLORER</span><h2 id="interest-potential-title">ค้นหาสิ่งที่สนใจ และศักยภาพที่กำลังเติบโต</h2><p>ใช้เวลาประมาณ 5–8 นาที ไม่มีคำตอบถูกผิด และไม่ใช้จัดอันดับเด็ก ผลลัพธ์มีทั้งฉบับเด็กและฉบับครู พร้อมนำไปสร้างแผนทดลอง 2–4 สัปดาห์</p></div>
         <div className="explorer-mode" aria-label="เลือกผู้ตอบ"><button type="button" className={mode === "student" ? "active" : ""} aria-pressed={mode === "student"} onClick={() => changeMode("student")}>ฉันเป็นนักเรียน</button><button type="button" className={mode === "teacher" ? "active" : ""} aria-pressed={mode === "teacher"} onClick={() => changeMode("teacher")}>ฉันเป็นครู</button></div>
       </header>
 
@@ -163,8 +172,9 @@ export default function InterestPotentialExplorer() {
           <header><div><span className="section-kicker left">YOUR SIGNAL MAP</span><h2>แผนที่สัญญาณ—not a label</h2></div><p>คะแนนสูงหมายถึง “ควรเปิดโอกาสให้สำรวจต่อ” ไม่ได้แปลว่าเก่งกว่าด้านอื่น หรือกำหนดอาชีพในอนาคต</p></header>
           <div className="signal-bars">{scores.map((score) => <article key={score.id}><span>{score.icon}</span><div><strong>{score.title}</strong><small>ความสนใจ {score.interest}/4 · หลักฐานศักยภาพ {score.strength}/2</small><div className="signal-meter"><i style={{ width: `${score.percent}%` }} /></div></div><b>{score.percent}%</b></article>)}</div>
           <div className="top-signals"><h3>3 พื้นที่ที่ควรชวนลองต่อ</h3><div>{topSignals.map((signal, index) => <article key={signal.id}><span>#{index + 1} {signal.icon}</span><h4>{signal.title}</h4><p>{signal.description}</p><strong>กิจกรรมทดลอง</strong><ul>{signal.experiments.map((experiment) => <li key={experiment}>{experiment}</li>)}</ul></article>)}</div></div>
+          <section className="audience-report" aria-labelledby="audience-report-title"><header><div><span className="section-kicker left">SHAREABLE REPORT</span><h3 id="audience-report-title">เลือกภาษาที่เหมาะกับผู้อ่าน</h3></div><div role="group" aria-label="เลือกรูปแบบรายงาน"><button type="button" className={reportView==="student"?"active":""} aria-pressed={reportView==="student"} onClick={()=>setReportView("student")}>ฉบับเด็ก</button><button type="button" className={reportView==="teacher"?"active":""} aria-pressed={reportView==="teacher"} onClick={()=>setReportView("teacher")}>ฉบับครู</button></div></header>{reportView==="student"?<div className="student-report"><span>นี่คือแผนที่สำหรับ “ลองต่อ” ไม่ใช่ป้ายบอกว่าเราเป็นใคร</span><h3>ช่วงนี้ เราน่าจะสนุกกับการลอง…</h3><ol>{topSignals.map(signal=><li key={signal.id}><strong>{signal.icon} {signal.title}</strong><p>{signal.experiments[0]}</p></li>)}</ol><p>หลังลองแล้ว ลองถามตัวเองว่า “ฉันอยากทำต่อไหม?”, “ฉันพัฒนาอะไรขึ้น?” และ “ฉันอยากลองแบบไหนอีก?”</p></div>:<div className="teacher-report"><h3>สมมติฐานเพื่อออกแบบโอกาสเรียนรู้</h3><p>สัญญาณเด่นควรตรวจสอบร่วมกับเสียงผู้เรียน ผลงาน และการสังเกตหลายบริบท ไม่ใช้จัดกลุ่มถาวรหรือทำนายอาชีพ</p><ol>{topSignals.map(signal=><li key={signal.id}><div><strong>{signal.title}</strong><small>สัญญาณรวม {signal.percent}%</small></div><span>ทดลอง: {signal.experiments[0]}</span></li>)}</ol><p><strong>หลักฐานติดตาม:</strong> การเลือกกลับมาทำ ความจดจ่อ ความพยายาม การตอบสนองต่อคำแนะนำ และการเกิดซ้ำในหลายสถานการณ์</p></div>}</section>
           <aside className="explorer-reflection"><div><strong>หลังทดลองกิจกรรม ให้สังเกต 4 อย่าง</strong><ol><li>เด็กเลือกหรือกลับมาทำเองหรือไม่</li><li>จดจ่อและพยายามนานขึ้นหรือไม่</li><li>เรียนรู้หรือพัฒนาจากคำแนะนำอย่างไร</li><li>เกิดขึ้นซ้ำในหลายสถานการณ์หรือไม่</li></ol></div><p><strong>ข้อสำคัญ</strong> ศักยภาพเปลี่ยนแปลงและพัฒนาได้ ผลครั้งเดียวอาจสะท้อนโอกาสที่เคยได้รับ ภาษา ความมั่นใจ หรือสภาพแวดล้อม จึงควรใช้ร่วมกับเสียงของเด็ก ผลงาน และการสังเกตต่อเนื่อง</p></aside>
-          <div className="explorer-actions"><button className="outline-action" type="button" onClick={copySummary}>{copied ? "คัดลอกแล้ว ✓" : "คัดลอกสรุป"}</button><a className="primary-button" href="/toolkit#profile-builder">นำไปใส่ Learner Profile</a><span>บันทึกผลใน Browser นี้แล้ว ✓</span></div>
+          <div className="explorer-actions no-print"><button className="outline-action" type="button" onClick={copySummary}>{copied ? "คัดลอกแล้ว ✓" : "คัดลอกสรุป"}</button><button className="outline-action" type="button" onClick={printReport}>พิมพ์ / บันทึก PDF</button><a className="primary-button" href="/toolkit#profile-builder">นำไปใส่ Learner Profile</a><a className="primary-button teal-action" href="/follow-up?from=interest">สร้างแผนทดลอง 2–4 สัปดาห์</a><span>บันทึกผลใน Browser นี้แล้ว ✓</span></div>
         </section>
       )}
     </section>

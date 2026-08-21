@@ -8,10 +8,13 @@ export const siteUrl = (
 export const siteRoutes = [
   "/",
   "/knowledge",
+  "/start",
   "/toolkit",
   "/paths",
   "/cases",
+  "/case-finder",
   "/coach",
+  "/follow-up",
   "/downloads",
   "/prompts",
   "/assessment",

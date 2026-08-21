@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const storageItems=[
-  {key:"learnerlens-profile",label:"Learner Profile",icon:"◇"},{key:"learnerlens-interest-potential",label:"Interest & Potential Map",icon:"✦"},{key:"learnerlens-coach-session",label:"AI Coach Plan",icon:"◫"},{key:"learnerlens-toolkit-checks",label:"Toolkit Checklist",icon:"✓"},{key:"learnerlens-observation-notes",label:"Observation Notes",icon:"▤"},{key:"learnerlens-path-modules",label:"Learning Path",icon:"↗"},{key:"learnerlens-progress",label:"Home Progress",icon:"◒"},{key:"learnerlens-self-assessment",label:"Self-Assessment",icon:"◎"},{key:"learnerlens-scores",label:"Home Assessment",icon:"◉"},{key:"learnerlens-checklist",label:"Quick Checklist",icon:"✓"},
+  {key:"learnerlens-profile",label:"Learner Profile",icon:"◇"},{key:"learnerlens-interest-potential",label:"Interest & Potential Map",icon:"✦"},{key:"learnerlens-coach-session",label:"AI Coach Plan",icon:"◫"},{key:"learnerlens-follow-up",label:"Follow-up Plan 2–4 Weeks",icon:"↗"},{key:"learnerlens-toolkit-checks",label:"Toolkit Checklist",icon:"✓"},{key:"learnerlens-observation-notes",label:"Observation Notes",icon:"▤"},{key:"learnerlens-path-modules",label:"Learning Path",icon:"↗"},{key:"learnerlens-progress",label:"Home Progress",icon:"◒"},{key:"learnerlens-self-assessment",label:"Self-Assessment",icon:"◎"},{key:"learnerlens-scores",label:"Home Assessment",icon:"◉"},{key:"learnerlens-checklist",label:"Quick Checklist",icon:"✓"},
 ];
 type Status = Record<string,boolean>;
 

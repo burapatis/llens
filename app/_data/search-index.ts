@@ -7,6 +7,9 @@ export type SearchItem = {
 };
 
 export const searchItems: SearchItem[] = [
+  { title: "เริ่มใช้งานวันนี้", description: "เลือกคำถามหนึ่งเรื่องและใช้วงจร เข้าใจ–สังเกต–ออกแบบ–ติดตาม", href: "/start", category: "เส้นทาง", keywords: ["เริ่มต้น", "วิธีใช้", "วันนี้", "workflow"] },
+  { title: "ค้นหากรณีศึกษา", description: "กรองกรณีศึกษาตามประเภทสถานการณ์ ช่วงวัย และคำสำคัญ", href: "/case-finder", category: "กรณีศึกษา", keywords: ["ค้นหา", "กรอง", "บูลลี่", "ครอบครัว", "เพื่อน"] },
+  { title: "ติดตามผล 2–4 สัปดาห์", description: "สร้างแผนทดลอง บันทึกหลักฐานระหว่างทาง และตัดสินใจก้าวถัดไป", href: "/follow-up", category: "เครื่องมือ", keywords: ["ติดตามผล", "intervention", "check-in", "แผนช่วยเหลือ"] },
   { title: "จิตวิทยาการเรียนรู้", description: "Piaget, Vygotsky, Bruner และ Bandura สู่การออกแบบการเรียนรู้", href: "/knowledge#learning-psychology", category: "ความรู้", keywords: ["ความจำ", "scaffolding", "ZPD", "ทฤษฎี"] },
   { title: "พัฒนาการเด็ก", description: "เข้าใจพัฒนาการหลายมิติและความแปรผันของผู้เรียน", href: "/knowledge#child-development", category: "ความรู้", keywords: ["เด็ก", "พัฒนาการ", "วัย"] },
   { title: "ความแตกต่างระหว่างบุคคล", description: "จุดแข็ง ความพร้อม ความสนใจ ประสบการณ์ และบริบท", href: "/knowledge#individual-differences", category: "ความรู้", keywords: ["ความหลากหลาย", "learner diversity"] },

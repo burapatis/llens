@@ -13,7 +13,7 @@ test("home renders real navigation and creator information", async () => {
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
-  for (const href of ["/knowledge", "/toolkit", "/paths", "/cases", "/coach", "/data", "/about"]) assert.match(html, new RegExp(`href="${href}"`));
+  for (const href of ["/start", "/knowledge", "/toolkit", "/paths", "/case-finder", "/coach", "/follow-up", "/data", "/about"]) assert.match(html, new RegExp(`href="${href}"`));
   assert.match(html, /ค้นหาทั้งเว็บไซต์/);
   assert.match(html, /ข้ามไปยังเนื้อหาหลัก/);
   assert.match(html, /Boorapatis Ploysuwan/);
@@ -22,7 +22,7 @@ test("home renders real navigation and creator information", async () => {
 });
 
 test("all destination pages server-render successfully", async () => {
-  const routes = ["/knowledge", "/toolkit", "/paths", "/cases", "/coach", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
+  const routes = ["/start", "/knowledge", "/toolkit", "/paths", "/cases", "/case-finder", "/coach", "/follow-up", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
   for (const route of routes) {
     const response = await render(route);
     assert.equal(response.status, 200, route);
@@ -86,4 +86,12 @@ test("AI Coach exposes a privacy-first three-step planning workflow", async () =
   assert.match(html, /ฉันตรวจแล้วว่าใช้รหัสแทนชื่อจริง/);
   assert.match(html, /ศูนย์ช่วยเหลือสังคม 1300/);
   assert.match(html, /สายด่วนสุขภาพจิต 1323/);
+});
+
+test("phase two supports a complete classroom action cycle", async () => {
+  const [start, finder, toolkit, followUp] = await Promise.all(["/start","/case-finder","/toolkit","/follow-up"].map(route=>render(route).then(response=>response.text())));
+  for (const text of ["วันนี้ครูอยากตอบคำถามใด", "วงจร 5 ก้าวที่ใช้ซ้ำได้", "YOUR DEVICE"]) assert.match(start,new RegExp(text));
+  for (const text of ["ประเภทสถานการณ์", "ช่วงวัย", "ค้นหาสถานการณ์ที่ใกล้เคียง"]) assert.match(finder,new RegExp(text));
+  for (const text of ["ฉบับเด็ก", "ฉบับครู", "สร้างแผนทดลอง 2–4 สัปดาห์"]) assert.match(toolkit,new RegExp(text));
+  for (const text of ["แผนทดลองหนึ่งก้าว", "CHECK-IN LOG", "พิมพ์ / บันทึก PDF"]) assert.match(followUp,new RegExp(text));
 });
