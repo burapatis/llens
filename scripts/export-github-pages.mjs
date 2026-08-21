@@ -24,6 +24,7 @@ const routes = [
   "/editorial",
   "/design-system",
   "/start",
+  "/whole-learner",
   "/toolkit",
   "/paths",
   "/cases",

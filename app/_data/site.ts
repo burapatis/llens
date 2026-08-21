@@ -23,6 +23,7 @@ export const siteRoutes = [
   "/editorial",
   "/design-system",
   "/start",
+  "/whole-learner",
   "/toolkit",
   "/paths",
   "/cases",

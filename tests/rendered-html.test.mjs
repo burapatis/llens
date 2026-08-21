@@ -13,7 +13,7 @@ test("home renders real navigation and creator information", async () => {
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
-  for (const href of ["/start", "/articles", "/knowledge", "/toolkit", "/paths", "/case-finder", "/coach", "/follow-up", "/data", "/about"]) assert.match(html, new RegExp(`href="${href}"`));
+  for (const href of ["/start", "/whole-learner", "/articles", "/knowledge", "/toolkit", "/paths", "/case-finder", "/coach", "/follow-up", "/data", "/about"]) assert.match(html, new RegExp(`href="${href}"`));
   assert.match(html, /ค้นหาทั้งเว็บไซต์/);
   assert.match(html, /ข้ามไปยังเนื้อหาหลัก/);
   assert.match(html, /Boorapatis Ploysuwan/);
@@ -23,7 +23,7 @@ test("home renders real navigation and creator information", async () => {
 });
 
 test("all destination pages server-render successfully", async () => {
-  const routes = ["/start", "/knowledge", "/articles", "/articles/udl", "/articles/learning-preferences", "/editorial", "/design-system", "/toolkit", "/paths", "/cases", "/case-finder", "/coach", "/follow-up", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
+  const routes = ["/start", "/whole-learner", "/knowledge", "/articles", "/articles/udl", "/articles/learning-preferences", "/editorial", "/design-system", "/toolkit", "/paths", "/cases", "/case-finder", "/coach", "/follow-up", "/downloads", "/prompts", "/assessment", "/data", "/about", "/principles"];
   for (const route of routes) {
     const response = await render(route);
     assert.equal(response.status, 200, route);
@@ -80,6 +80,14 @@ test("toolkit exposes every MVP tool target", async () => {
   assert.match(html,/ไม่มีคำตอบถูกผิด/);
   assert.match(html,/ไม่ใช้จัดอันดับเด็ก/);
   assert.match(html,/แผนที่ความสนใจและศักยภาพ/);
+});
+
+test("whole learner map explains eight dimensions and an evidence-to-action workflow", async () => {
+  const html = await render("/whole-learner").then(response=>response.text());
+  for (const id of ["development", "learning", "executive", "motivation", "emotion", "relationships", "identity", "context"]) assert.match(html,new RegExp(`id="${id}"`));
+  for (const text of ["หนึ่งคน", "หนึ่งเรื่องราว", "สังเกตเพื่อเข้าใจ ไม่ใช่เฝ้าจับผิด", "ไม่ส่งงาน", "ไม่เข้าใจ", "เริ่มไม่ถูก", "บริบทขัดขวาง", "ใช้แผนที่นี้กับเด็กหนึ่งคนใน 15 นาที", "พิมพ์ / บันทึกเป็น PDF"]) assert.match(html,new RegExp(text));
+  assert.match(html,/href="\/toolkit#observation-log"/);
+  assert.match(html,/href="\/toolkit#profile-builder"/);
 });
 
 test("AI Coach exposes a privacy-first three-step planning workflow", async () => {

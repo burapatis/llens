@@ -8,6 +8,7 @@ export type SearchItem = {
 
 export const searchItems: SearchItem[] = [
   { title: "เริ่มใช้งานวันนี้", description: "เลือกคำถามหนึ่งเรื่องและใช้วงจร เข้าใจ–สังเกต–ออกแบบ–ติดตาม", href: "/start", category: "เส้นทาง", keywords: ["เริ่มต้น", "วิธีใช้", "วันนี้", "workflow"] },
+  { title: "แผนที่เข้าใจผู้เรียนทั้งคน", description: "ภาพรวม 8 มิติที่ครูควรสังเกตเพื่อเข้าใจเด็กอย่างลึกซึ้ง รอบด้าน และไม่รีบติดป้าย", href: "/whole-learner", category: "เครื่องมือ", keywords: ["เข้าใจเด็ก", "สังเกตผู้เรียน", "ทั้งคน", "พัฒนาการ", "อารมณ์", "บริบท", "ความสัมพันธ์", "แรงจูงใจ"] },
   { title: "ค้นหากรณีศึกษา", description: "กรองกรณีศึกษาตามประเภทสถานการณ์ ช่วงวัย และคำสำคัญ", href: "/case-finder", category: "กรณีศึกษา", keywords: ["ค้นหา", "กรอง", "บูลลี่", "ครอบครัว", "เพื่อน"] },
   { title: "ติดตามผล 2–4 สัปดาห์", description: "สร้างแผนทดลอง บันทึกหลักฐานระหว่างทาง และตัดสินใจก้าวถัดไป", href: "/follow-up", category: "เครื่องมือ", keywords: ["ติดตามผล", "intervention", "check-in", "แผนช่วยเหลือ"] },
   { title: "LearnerLens Design System", description: "มาตรฐานสี ตัวอักษร การเข้าถึง และส่วนประกอบกลางของเว็บไซต์", href: "/design-system", category: "ทรัพยากร", keywords: ["design system", "component", "accessibility", "มาตรฐานการออกแบบ"] },

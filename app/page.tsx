@@ -71,11 +71,11 @@ export default function Home() {
         </a>
         <nav className={menuOpen ? "nav open" : "nav"} aria-label="เมนูหลัก">
           <a href="/start">เริ่มใช้งาน</a>
+          <a href="/whole-learner">แผนที่ผู้เรียน</a>
           <a href="/knowledge">คลังความรู้</a>
           <a href="/toolkit">เครื่องมือ</a>
           <a href="/paths">เส้นทางการเรียนรู้</a>
           <a href="/case-finder">ค้นหากรณี</a>
-          <a href="/about">เกี่ยวกับโครงการ</a>
         </nav>
         <div className="header-actions">
           <GlobalSearch />
@@ -137,7 +137,7 @@ export default function Home() {
           <p>เมื่อครูมองเห็นความต้องการ จุดแข็ง และบริบทที่แตกต่าง การสอนก็ไม่จำเป็นต้องมีเพียงคำตอบเดียว</p>
         </div>
         <div className="feature-grid">
-          <article><span className="feature-number">01</span><div className="feature-icon blue">◉</div><h3>มองเห็นผู้เรียนทั้งคน</h3><p>เข้าใจมากกว่าคะแนน ผ่านพัฒนาการ แรงจูงใจ อารมณ์ และบริบทชีวิต</p><a href="/toolkit">เรียนรู้การวิเคราะห์ <Arrow /></a></article>
+          <article><span className="feature-number">01</span><div className="feature-icon blue">◉</div><h3>มองเห็นผู้เรียนทั้งคน</h3><p>เข้าใจมากกว่าคะแนน ผ่านพัฒนาการ แรงจูงใจ อารมณ์ และบริบทชีวิต</p><a href="/whole-learner">เปิดแผนที่ผู้เรียน <Arrow /></a></article>
           <article><span className="feature-number">02</span><div className="feature-icon teal">↗</div><h3>ออกแบบเพื่อความแตกต่าง</h3><p>ปรับเนื้อหา กระบวนการ และชิ้นงาน ให้ทุกคนเข้าถึงและท้าทายในระดับที่เหมาะสม</p><a href="/articles/udl">สำรวจแนวทาง UDL <Arrow /></a></article>
           <article><span className="feature-number">03</span><div className="feature-icon violet">✦</div><h3>เปลี่ยนข้อมูลเป็นการช่วยเหลือ</h3><p>ใช้หลักฐานเล็ก ๆ จากห้องเรียน วางแผน ลงมือ และติดตามการเติบโตอย่างต่อเนื่อง</p><a href="/coach">ลองวางแผนกับ AI <Arrow /></a></article>
         </div>
