@@ -69,3 +69,11 @@ test("toolkit exposes every MVP tool target", async () => {
   assert.match(html,/ไม่ใช้จัดอันดับเด็ก/);
   assert.match(html,/แผนที่ความสนใจและศักยภาพ/);
 });
+
+test("AI Coach exposes a privacy-first three-step planning workflow", async () => {
+  const html = await render("/coach").then(response => response.text());
+  for (const text of ["วิเคราะห์สถานการณ์", "สร้างแผนการสอน", "สร้างแบบประเมิน", "วางแผนช่วยเหลือ", "คำถามชี้แจง", "แผนปฏิบัติ", "ดึงจาก Learner Profile", "ประมวลผลใน Browser"]) assert.match(html, new RegExp(text));
+  assert.match(html, /ฉันตรวจแล้วว่าใช้รหัสแทนชื่อจริง/);
+  assert.match(html, /ศูนย์ช่วยเหลือสังคม 1300/);
+  assert.match(html, /สายด่วนสุขภาพจิต 1323/);
+});

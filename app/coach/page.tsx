@@ -4,9 +4,9 @@ import CoachClient from "./CoachClient";
 
 export const metadata: Metadata = {
   title: "AI Teacher Coach | LearnerLens",
-  description: "ผู้ช่วยตั้งคำถามและวางแผนการสอนอย่างรับผิดชอบ โดยไม่วินิจฉัยหรือติดป้ายผู้เรียน",
-  openGraph: { title: "AI Teacher Coach | LearnerLens", description: "เปลี่ยนข้อมูลการสังเกตเป็นแนวทางทดลองในห้องเรียน", images: [] },
+  description: "ผู้ช่วยวิเคราะห์สถานการณ์ ตั้งคำถาม และสร้างแผนการสอน กิจกรรม แบบประเมิน และแผนช่วยเหลืออย่างรับผิดชอบ",
+  openGraph: { title: "AI Teacher Coach | LearnerLens", description: "เปลี่ยนข้อมูลการสังเกตเป็นแผนที่นำไปทดลองและติดตามผลได้", images: [] },
   twitter: { title: "AI Teacher Coach | LearnerLens", description: "AI ผู้ช่วยคิดสำหรับครู", images: [] },
 };
 
-export default function CoachPage(){return <SubPage eyebrow="AI TEACHER COACH" title="คิดไปกับ AI โดยครูยังเป็นผู้ตัดสินใจ" description="รุ่นทดลองนี้ช่วยจัดโครงข้อมูลและเสนอทางเลือกเบื้องต้น ข้อมูลไม่ถูกส่งออกจาก Browser และผลลัพธ์ไม่ใช่การวินิจฉัย"><CoachClient /></SubPage>}
+export default function CoachPage(){return <SubPage eyebrow="AI TEACHER COACH" title="คิดอย่างเป็นระบบ แล้วเปลี่ยนเป็นแผนที่ลงมือได้" description="Coach จะช่วยตรวจบริบท ถามคำถามก่อนสรุป และสร้างแผนพร้อมหลักฐานติดตาม โดยข้อมูลอยู่ใน Browser และครูยังเป็นผู้ตัดสินใจ"><CoachClient /></SubPage>}

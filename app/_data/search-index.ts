@@ -41,7 +41,7 @@ export const searchItems: SearchItem[] = [
   { title: "Interview Guide", description: "คำถามปลายเปิดเพื่อฟังประสบการณ์ของผู้เรียน", href: "/toolkit#interview-guide", category: "เครื่องมือ", keywords: ["สัมภาษณ์", "learner voice"] },
   { title: "Evidence Rubric", description: "ตรวจคุณภาพหลักฐานก่อนตัดสินใจช่วยเหลือ", href: "/toolkit#evidence-rubric", category: "เครื่องมือ", keywords: ["rubric", "หลักฐาน"] },
   { title: "Self-Assessment Center", description: "ประเมินความพร้อมและดูผลแบบ Radar Chart", href: "/assessment", category: "เครื่องมือ", keywords: ["ประเมินตนเอง", "radar"] },
-  { title: "AI Teacher Coach", description: "ผู้ช่วยจัดโครงข้อมูลและเสนอแนวทางอย่างไม่ติดป้าย", href: "/coach", category: "เครื่องมือ", keywords: ["AI", "วิเคราะห์", "กิจกรรม"] },
+  { title: "AI Teacher Coach", description: "วิเคราะห์สถานการณ์ ถามคำถาม และสร้างแผนการสอน กิจกรรม แบบประเมิน หรือแผนช่วยเหลือ", href: "/coach", category: "เครื่องมือ", keywords: ["AI", "วิเคราะห์", "กิจกรรม", "แผนการสอน", "แบบประเมิน", "ช่วยเหลือ"] },
   { title: "เส้นทาง Beginner", description: "เปิดเลนส์และเข้าใจความแตกต่าง", href: "/paths", category: "เส้นทาง", keywords: ["beginner", "เริ่มต้น"] },
   { title: "เส้นทาง Intermediate", description: "อ่านร่องรอยการเรียนรู้และสร้าง Learner Profile", href: "/paths", category: "เส้นทาง", keywords: ["intermediate", "สังเกต"] },
   { title: "เส้นทาง Advanced", description: "ออกแบบ UDL, Differentiation และ Assessment", href: "/paths", category: "เส้นทาง", keywords: ["advanced", "UDL"] },
