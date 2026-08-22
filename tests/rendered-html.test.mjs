@@ -110,6 +110,12 @@ test("phase two supports a complete classroom action cycle", async () => {
   for (const text of ["แผนทดลองหนึ่งก้าว", "CHECK-IN LOG", "พิมพ์ / บันทึก PDF"]) assert.match(followUp,new RegExp(text));
 });
 
+test("learning path clearly explains how to use and complete each module", async () => {
+  const html = await render("/paths").then(response => response.text());
+  for (const text of ["หน้านี้คือแผนที่การเรียนรู้และเช็กลิสต์ส่วนตัว", "เลือกจุดเริ่ม", "เปิดเนื้อหา", "ลองใช้กับงานจริง", "กลับมาติ๊กเมื่อจบ", "ต้องทำทุกบทหรือไม่", "ไม่มีคะแนนสอบและไม่ใช้จัดอันดับ", "ความก้าวหน้าบันทึกเฉพาะ Browser"]) assert.match(html, new RegExp(text));
+  for (const href of ["/whole-learner", "/articles/child-development", "/toolkit#observation-log", "/articles/executive-functions", "/articles/udl", "/follow-up"]) assert.match(html, new RegExp(`href="${href}"`));
+});
+
 test("phase three publishes standardized evidence-informed articles", async () => {
   const [library, udl, preferences, editorial] = await Promise.all(["/articles", "/articles/udl", "/articles/learning-preferences", "/editorial"].map(route => render(route).then(response => response.text())));
   assert.match(library, /11 หัวข้อ/);

@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function PathsPage() {
-  return <SubPage eyebrow="LEARNING PATH" title="จากเข้าใจความแตกต่าง สู่การเปลี่ยนห้องเรียน" description="เรียนตามลำดับหรือเลือกเฉพาะเรื่องที่ต้องใช้ ความก้าวหน้าจะบันทึกไว้ในอุปกรณ์นี้"><PathsClient /></SubPage>;
+  return <SubPage eyebrow="LEARNING PATH" title="จากเข้าใจความแตกต่าง สู่การเปลี่ยนห้องเรียน" description="ใช้หน้านี้เป็นแผนที่นำทาง: เลือกบท เปิดเนื้อหาหรือเครื่องมือที่แนะนำ ทดลองใช้กับงานจริง แล้วกลับมาติ๊กบันทึกความก้าวหน้าในอุปกรณ์นี้"><PathsClient /></SubPage>;
 }
