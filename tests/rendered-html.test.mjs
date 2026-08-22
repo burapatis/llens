@@ -90,6 +90,9 @@ test("whole learner map explains eight dimensions and an evidence-to-action work
   const html = await render("/whole-learner").then(response=>response.text());
   for (const id of ["development", "learning", "executive", "motivation", "emotion", "relationships", "identity", "context"]) assert.match(html,new RegExp(`id="${id}"`));
   for (const text of ["หนึ่งคน", "หนึ่งเรื่องราว", "สังเกตเพื่อเข้าใจ ไม่ใช่เฝ้าจับผิด", "ไม่ส่งงาน", "ไม่เข้าใจ", "เริ่มไม่ถูก", "บริบทขัดขวาง", "ใช้แผนที่นี้กับเด็กหนึ่งคนใน 15 นาที", "พิมพ์ / บันทึกเป็น PDF"]) assert.match(html,new RegExp(text));
+  for (const text of ["ตัวอย่างพฤติกรรมที่สังเกตได้", "ง่วงและวางศีรษะบนโต๊ะ", "อธิบายคำตอบปากเปล่าได้ครบ", "นั่งรอ 7 นาที", "ค้นข้อมูลเรื่องรถไฟต่อเอง", "ลบคำตอบซ้ำ", "ไม่ได้รับเลือกเข้ากลุ่มซ้ำ", "ภาษาที่บ้าน", "งานที่ต้องทำออนไลน์ที่บ้านขาด", "นำไปใช้อย่างไร"]) assert.match(html,new RegExp(text));
+  for (const text of ["เด็กเริ่มหลังเพื่อนเฉลี่ย 8 นาที", "รู้คำตอบ แต่ไม่รู้จะเริ่มประโยคแรก", "เมื่อมีประโยคเริ่มต้น", "วาดแผนภาพและเล่าก่อนเขียน", "สรุปชั่วคราวจากหลักฐานที่มาบรรจบกัน", "อุปสรรคอยู่ที่การเริ่มและถ่ายทอดความคิดเป็นงานเขียน"]) assert.match(html,new RegExp(text));
+  for (const id of ["practice-development", "practice-learning", "practice-executive", "practice-motivation", "practice-emotion", "practice-relationships", "practice-identity", "practice-context"]) assert.match(html,new RegExp(`id="${id}"`));
   assert.match(html,/href="\/toolkit#observation-log"/);
   assert.match(html,/href="\/toolkit#profile-builder"/);
 });
