@@ -22,6 +22,7 @@ test("GitHub Pages export contains every public route and discovery file", async
   for (const file of ["404.html", "CNAME", ".nojekyll", "sitemap.xml", "robots.txt", "static-export.json"]) {
     await exists(join(outputDir, file), file);
   }
+  await exists(join(outputDir, "images", "learnerlens-welcome.jpg"), "welcome guide image");
   assert.equal((await readFile(join(outputDir, "CNAME"), "utf8")).trim(), "llens.thamdee.com");
   assert.match(await readFile(join(outputDir, "sitemap.xml"), "utf8"), /https:\/\/llens\.thamdee\.com\/toolkit/);
   assert.match(await readFile(join(outputDir, "robots.txt"), "utf8"), /https:\/\/llens\.thamdee\.com\/sitemap\.xml/);

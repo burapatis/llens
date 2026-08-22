@@ -3,6 +3,7 @@ import "./globals.css";
 import "./pages.css";
 import "./typography.css";
 import { siteUrl } from "./_data/site";
+import { WelcomeGuide } from "./_components/WelcomeGuide";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -33,5 +34,5 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const structuredData = { "@context":"https://schema.org", "@type":"WebSite", name:"เรียนรู้ผู้เรียน | LearnerLens", alternateName:["LearnerLens","เข้าใจผู้เรียน"], url:siteUrl, description:"แพลตฟอร์มความรู้และเครื่องมือสำหรับครู เพื่อเข้าใจความแตกต่างของผู้เรียน", inLanguage:"th", author:{"@type":"Person",name:"Boorapatis Ploysuwan",jobTitle:"ผู้วิจัยอิสระ",email:"burapatis@gmail.com",image:`${siteUrl}/images/boorapatis-ploysuwan.jpg`}, potentialAction:{"@type":"SearchAction",target:`${siteUrl}/?q={search_term_string}`,"query-input":"required name=search_term_string"} };
-  return <html lang="th"><body><a className="skip-link" href="#main-content">ข้ามไปยังเนื้อหาหลัก</a>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(structuredData)}}/></body></html>;
+  return <html lang="th"><body><a className="skip-link" href="#main-content">ข้ามไปยังเนื้อหาหลัก</a>{children}<WelcomeGuide/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(structuredData)}}/></body></html>;
 }
