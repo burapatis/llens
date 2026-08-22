@@ -68,7 +68,7 @@ export default function FollowUpClient() {
         <div className="follow-up-actions no-print"><button className="primary-button" type="submit">บันทึกแผน</button><button className="outline-action" type="button" onClick={print}>พิมพ์ / บันทึก PDF</button><button className="quiet-action" type="button" onClick={download}>ดาวน์โหลด JSON</button></div>
       </form>
 
-      <aside className="decision-guide"><span className="section-kicker left">DECISION GUIDE</span><h2>เมื่อถึงวันทบทวน</h2><ol><li><strong>คงไว้</strong><span>หากมีสัญญาณดีขึ้นซ้ำและเด็กเห็นว่าช่วย</span></li><li><strong>ปรับ</strong><span>หากหลักฐานยังไม่ชัด ลองเปลี่ยนทีละอย่าง</span></li><li><strong>ประสาน</strong><span>หากปัญหาต่อเนื่อง รุนแรง หรือเกินขอบเขตครู</span></li></ol><p>ความปลอดภัยมาก่อน หากสงสัยการทำร้าย ความรุนแรง หรืออันตรายทันที ให้ใช้ระบบคุ้มครองเด็กของสถานศึกษาและผู้เชี่ยวชาญในพื้นที่</p></aside>
+      <aside className="decision-guide" id="review-decision"><span className="section-kicker left">DECISION GUIDE</span><h2>เมื่อถึงวันทบทวน</h2><ol><li><strong>คงไว้</strong><span>หากมีสัญญาณดีขึ้นซ้ำและเด็กเห็นว่าช่วย</span></li><li><strong>ปรับ</strong><span>หากหลักฐานยังไม่ชัด ลองเปลี่ยนทีละอย่าง</span></li><li><strong>ประสาน</strong><span>หากปัญหาต่อเนื่อง รุนแรง หรือเกินขอบเขตครู</span></li></ol><p>ความปลอดภัยมาก่อน หากสงสัยการทำร้าย ความรุนแรง หรืออันตรายทันที ให้ใช้ระบบคุ้มครองเด็กของสถานศึกษาและผู้เชี่ยวชาญในพื้นที่</p></aside>
     </div>
 
     <section className="check-in-section no-print"><header><div><span className="section-kicker left">CHECK-IN LOG</span><h2>บันทึกหลักฐานระหว่างทาง</h2></div><strong>{checkIns.length} ครั้ง</strong></header>

@@ -105,6 +105,9 @@ test("AI Coach exposes a privacy-first three-step planning workflow", async () =
 test("phase two supports a complete classroom action cycle", async () => {
   const [start, finder, toolkit, followUp] = await Promise.all(["/start","/case-finder","/toolkit","/follow-up"].map(route=>render(route).then(response=>response.text())));
   for (const text of ["วันนี้ครูอยากตอบคำถามใด", "วงจร 5 ก้าวที่ใช้ซ้ำได้", "YOUR DEVICE"]) assert.match(start,new RegExp(text));
+  for (const text of ["ผลที่ได้", "คำถามหนึ่งประโยค", "บันทึกข้อเท็จจริง", "แผนหนึ่งก้าว", "ข้อมูลก่อน–ระหว่าง–หลัง", "คงไว้ ปรับใหม่ หรือประสานความช่วยเหลือ", "วงจรจึงเป็นการพัฒนาอย่างต่อเนื่อง"]) assert.match(start,new RegExp(text));
+  for (const href of ["#choose-question", "/toolkit#observation-log", "/coach", "/follow-up#follow-up-report", "/follow-up#review-decision"]) assert.match(start,new RegExp(`href="${href}"`));
+  assert.match(followUp,/id="review-decision"/);
   for (const text of ["ประเภทสถานการณ์", "ระดับการศึกษา", "ปฐมวัย", "อาชีวศึกษา", "อุดมศึกษา", "ค้นหาสถานการณ์ที่ใกล้เคียง"]) assert.match(finder,new RegExp(text));
   for (const text of ["ฉบับเด็ก", "ฉบับครู", "สร้างแผนทดลอง 2–4 สัปดาห์"]) assert.match(toolkit,new RegExp(text));
   for (const text of ["แผนทดลองหนึ่งก้าว", "CHECK-IN LOG", "พิมพ์ / บันทึก PDF"]) assert.match(followUp,new RegExp(text));
