@@ -6,6 +6,7 @@
 import { useEffect, useState } from "react";
 import { SiteFooter } from "./_components/SiteChrome";
 import { GlobalSearch } from "./_components/GlobalSearch";
+import { buildHomeCoachResult, type HomeCoachResult } from "./_lib/homeCoach";
 
 const Arrow = () => <span aria-hidden="true">→</span>;
 
@@ -33,7 +34,7 @@ export default function Home() {
   const [checked, setChecked] = useState<number[]>([]);
   const [pathProgress, setPathProgress] = useState(25);
   const [coachInput, setCoachInput] = useState("");
-  const [coachReady, setCoachReady] = useState(false);
+  const [coachResult, setCoachResult] = useState<HomeCoachResult | null>(null);
   const [scores, setScores] = useState([3, 2, 3, 2]);
   const [copied, setCopied] = useState(false);
 
@@ -198,13 +199,23 @@ export default function Home() {
 
       <section className="coach-section" id="coach">
         <div className="coach-shell">
-          <div className="coach-intro"><span className="spark">✦</span><span className="section-kicker left light">AI TEACHER COACH</span><h2>คิดไปด้วยกัน<br/>เพื่อผู้เรียนของคุณ</h2><p>เล่าสถานการณ์โดยไม่ใส่ชื่อหรือข้อมูลระบุตัวตน แล้วรับแนวทางที่มีเหตุผล อ้างอิงหลักการ และนำไปปรับใช้ได้</p><div className="safety-pill">◉ AI จะถามกลับก่อนสรุป และไม่วินิจฉัยผู้เรียน</div></div>
+          <div className="coach-intro"><span className="spark">✦</span><span className="section-kicker left light">AI TEACHER COACH</span><h2>คิดไปด้วยกัน<br/>เพื่อผู้เรียนของคุณ</h2><p>เล่าสถานการณ์โดยไม่ใส่ชื่อหรือข้อมูลระบุตัวตน แล้วรับแนวทางที่มีเหตุผล อ้างอิงหลักการ และนำไปปรับใช้ได้</p><div className="safety-pill">◉ ผู้ช่วยจะเสนอคำถามตรวจสอบก่อนสรุป และไม่วินิจฉัยผู้เรียน</div></div>
           <div className="coach-chat">
-            <div className="chat-top"><div><span>✦</span><strong>ครูคู่คิด</strong><small>พร้อมช่วยวางแผน</small></div><span className="online">● ONLINE</span></div>
-            <div className="suggestion-row"><button onClick={() => setCoachInput("ช่วยวิเคราะห์นักเรียนที่ไม่ยอมเริ่มงาน แต่ตอบคำถามปากเปล่าได้ดี")}>วิเคราะห์ผู้เรียน</button><button onClick={() => setCoachInput("ช่วยออกแบบกิจกรรมที่มีทางเลือกสำหรับผู้เรียนหลากหลาย")}>ออกแบบกิจกรรม</button></div>
-            <textarea value={coachInput} onChange={(event) => {setCoachInput(event.target.value);setCoachReady(false);}} placeholder="เล่าสถานการณ์ที่คุณอยากคิดไปด้วยกัน..." aria-label="ข้อความถึง AI Teacher Coach" />
-            <button className="send-button" disabled={!coachInput.trim()} onClick={() => setCoachReady(true)}>ขอแนวทาง <Arrow /></button>
-            {coachReady && <div className="coach-answer"><strong>มุมมองเบื้องต้น</strong><p>พฤติกรรมนี้อาจเกี่ยวกับความชัดเจนของงาน ความมั่นใจ หรือรูปแบบการตอบสนองที่ถนัด ลองตรวจสอบด้วยคำถามสั้น ๆ ก่อนสรุป</p><ol><li>ให้ผู้เรียนอธิบายสิ่งที่เข้าใจด้วยปากเปล่า</li><li>แบ่งงานเป็นก้าวแรกที่ใช้เวลาไม่เกิน 3 นาที</li><li>เสนอทางเลือกในการเริ่ม: เขียน วาด หรือเล่าให้เพื่อนฟัง</li></ol><small>ตัวอย่างนี้เป็นคำแนะนำเพื่อการสอน ไม่ใช่การวินิจฉัย</small></div>}
+            <div className="chat-top"><div><span>✦</span><strong>ครูคู่คิด</strong><small>พร้อมช่วยวางแผน</small></div><span className="online">● IN BROWSER</span></div>
+            <div className="suggestion-row"><button onClick={() => { setCoachInput("ช่วยวิเคราะห์นักเรียนที่ไม่ยอมเริ่มงาน แต่ตอบคำถามปากเปล่าได้ดี"); setCoachResult(null); }}>วิเคราะห์ผู้เรียน</button><button onClick={() => { setCoachInput("นักเรียนสนใจเรื่องอวกาศมาก แต่ไม่ค่อยร่วมกิจกรรมกลุ่มและเปลี่ยนกิจกรรมได้ยาก"); setCoachResult(null); }}>ความสนใจและการมีส่วนร่วม</button></div>
+            <textarea value={coachInput} onChange={(event) => { setCoachInput(event.target.value); setCoachResult(null); }} placeholder="เล่าสิ่งที่สังเกตได้ บริบทที่เกิด จุดแข็ง และสิ่งที่ครูได้ลองแล้ว..." aria-label="ข้อความถึง AI Teacher Coach" />
+            <div className="coach-compose-footer"><small>{coachInput.trim().length} ตัวอักษร · ไม่ใส่ชื่อหรือข้อมูลระบุตัวตน</small><button className="send-button" disabled={coachInput.trim().length < 8} onClick={() => setCoachResult(buildHomeCoachResult(coachInput))}>ขอแนวทาง <Arrow /></button></div>
+            {coachResult && <div className={coachResult.urgent ? "coach-answer urgent" : "coach-answer"} aria-live="polite">
+              <strong>{coachResult.title}</strong>
+              <p>{coachResult.context}</p>
+              <h4>สิ่งที่ควรมองก่อน</h4>
+              <ul>{coachResult.lenses.map((lens) => <li key={lens}>{lens}</li>)}</ul>
+              <h4>คำถามเพื่อตรวจสอบ</h4><p>{coachResult.question}</p>
+              <h4>ก้าวเล็กที่ทดลองได้</h4><ol>{coachResult.actions.map((action) => <li key={action}>{action}</li>)}</ol>
+              <h4>ติดตามผล</h4><p>{coachResult.monitor}</p>
+              <small>{coachResult.caution}</small>
+              <a href="/coach">เปิด AI Coach ฉบับเต็ม <Arrow /></a>
+            </div>}
           </div>
         </div>
       </section>

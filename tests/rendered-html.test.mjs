@@ -19,6 +19,9 @@ test("home renders real navigation and creator information", async () => {
   assert.match(html, /Boorapatis Ploysuwan/);
   assert.match(html, /mailto:burapatis@gmail\.com/);
   assert.match(html, /ดูภาพแนะนำเว็บไซต์/);
+  assert.match(html, /สิ่งที่สังเกตได้ บริบทที่เกิด จุดแข็ง/);
+  assert.match(html, /ไม่ใส่ชื่อหรือข้อมูลระบุตัวตน/);
+  assert.doesNotMatch(html, /พฤติกรรมนี้อาจเกี่ยวกับความชัดเจนของงาน ความมั่นใจ/);
   assert.match(html, /class="brand-copy"[^>]*><span class="brand-en">Learner<span>Lens<\/span><\/span><small>เรียนรู้ผู้เรียน<\/small>/);
   assert.doesNotMatch(html, /#case-detail|href="#principles"/);
 });
